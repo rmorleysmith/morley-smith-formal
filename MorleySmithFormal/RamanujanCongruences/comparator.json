@@ -1,0 +1,13 @@
+{
+  "challenge_module": "MorleySmithFormal.RamanujanCongruences.Challenge",
+  "solution_module": "MorleySmithFormal.RamanujanCongruences.Solution",
+  "theorem_names": [
+    "RamanujanCongruences.congr_12",
+    "RamanujanCongruences.congr_16",
+    "RamanujanCongruences.congr_18",
+    "RamanujanCongruences.congr_20",
+    "RamanujanCongruences.congr_22",
+    "RamanujanCongruences.congr_26"
+  ],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"]
+}

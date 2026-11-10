@@ -1,0 +1,6 @@
+{
+  "challenge_module": "MorleySmithFormal.HeckePropagation.Challenge",
+  "solution_module": "MorleySmithFormal.HeckePropagation.Solution",
+  "theorem_names": ["HeckePropagation.congr_of_prime", "HeckePropagation.sigma_recursion"],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"]
+}

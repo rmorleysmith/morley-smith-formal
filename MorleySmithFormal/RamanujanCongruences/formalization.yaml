@@ -1,0 +1,136 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "Ramanujan's congruences for the one-dimensional cusp spaces"
+  description: >-
+    For k = 12, 16, 18, 20, 22, 26 the space of level-one cusp forms of weight k is spanned by
+    Δ·E₄^a·E₆^b with 4a + 6b = k − 12. Its q-expansion coefficients are integers congruent to
+    σ_{k−1}(n) modulo the numerator of B_k/2k: 691, 3617, 43867, 174611 = 283·617,
+    77683 = 131·593 and 657931. The case k = 12 is Ramanujan's τ(n) ≡ σ₁₁(n) (mod 691).
+    Integrality comes from the product formula for Δ, expanded by Mathlib's pentagonal number
+    theorem, and the integer coefficients 240σ₃ and −504σ₅ of E₄ and E₆. The congruence
+    comes from one exact identity in M_k: E₄^(a+3)·E₆^b − E_k vanishes at the cusp, so dividing
+    by Δ (Mathlib's discriminantEquiv) gives a form in M_{k−12}, which is one-dimensional and
+    spanned by E₄^a·E₆^b; hence E₄^(a+3)·E₆^b − E_k = c·Δ·E₄^a·E₆^b, with c read off from the
+    q¹-coefficient. Since E_k = 1 − (2k/B_k)∑σ_{k−1}(n)qⁿ, multiplying by the numerator of
+    B_k/2k and reducing shows that the Eisenstein series is congruent to the cusp form. The
+    argument is proved once for general (a, b) and applied to the six cases.
+  authors:
+    - "Richard Morley-Smith"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Richard Morley-Smith"
+
+classification:
+  arxiv: ["math.NT"]
+  msc2020: ["11F33", "11F11", "11B68"]
+
+sources:
+  - title: "On certain arithmetical functions"
+    authors:
+      - "S. Ramanujan"
+    id: "Transactions of the Cambridge Philosophical Society 22 (1916)"
+    type: "paper"
+    relationship: "independently-proves"
+    note: >-
+      Source of the congruence τ(n) ≡ σ₁₁(n) (mod 691), the case k = 12. The Lean proof
+      follows the standard modern argument (an identity between E₄³, E₁₂ and Δ in M₁₂, then
+      clearing the denominator 691) rather than the text of the paper. The location of the
+      congruence within the paper was not checked for this file.
+    license: "unknown"
+    author_endorsement: "n/a"
+  - title: "On ℓ-adic representations and congruences for coefficients of modular forms"
+    authors:
+      - "H. P. F. Swinnerton-Dyer"
+    id: "Modular Functions of One Variable III, Lecture Notes in Mathematics 350, Springer (1973)"
+    type: "paper"
+    relationship: "independently-proves"
+    note: >-
+      Treats the congruences for the coefficients of the cusp forms of weights 12, 16, 18, 20,
+      22, 26 modulo the primes dividing the numerator of B_k/2k, as part of the theory of the
+      attached ℓ-adic representations. The Lean proof does not use that theory: it is the
+      elementary argument through an exact identity in M_k. The Lean statements use the full
+      numerator (283·617 and 131·593 for k = 20, 22), which is equivalent to the congruence
+      modulo each prime. The exact form of the statements in the paper, and their section and
+      page, were not checked for this file.
+    license: "unknown"
+    author_endorsement: "n/a"
+
+related_formalizations:
+  - id: "https://github.com/rmorleysmith/fugue-formal/tree/v1.0.0"
+    relationship: "builds-on"
+    note: >-
+      Fugue/Tau691.lean (Lean v4.34.1) proves the case k = 12. Its pieces (integrality of Δ via
+      the pentagonal series, the identity E₄³ − E₁₂ = (432000/691)Δ, clearing the
+      denominator) are ported to Lean v4.35.0 and the module system and generalised to
+      E₄^(a+3)·E₆^b − E_k = c·Δ·E₄^a·E₆^b for every (a, b) with M_{4a+6b} one-dimensional.
+
+status:
+  scope: >-
+    Fully proved: all six congruences (k = 12, 16, 18, 20, 22, 26), each with the integrality
+    of the coefficients. The general lemma congr_of covers any (a, b) for which M_{4a+6b} is
+    one-dimensional, given the value of 2k/B_k as D/ℓ with ℓ and D coprime; the six instances
+    supply these, with the Bernoulli numbers computed in Bernoulli.lean.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: ["propext", "Classical.choice", "Quot.sound"]
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["Claude (Anthropic)"]
+      framework: "Claude Code"
+      tool_setup: >-
+        The author directed the work; Claude, through Claude Code (a coordinating session and
+        one subagent), wrote the statements and the Lean proofs, and the Lean kernel and
+        Comparator verified the result.
+      cost:
+        wall_time: "about one hour"
+        spend_usd: "not tracked"
+        hardware: "local machine"
+  spend_usd: "not tracked"
+  notes: >-
+    The moduli were checked in Python as the numerators of B_k/2k, and the six congruences were
+    checked numerically for n < 40 before the proof. The Challenge uses only Mathlib definitions
+    (UpperHalfPlane.qExpansion, CuspForm.discriminant, E₄, E₆, ArithmeticFunction.sigma).
+
+fidelity:
+  divergences: >-
+    The forms are stated as products of Mathlib's q-expansions of Δ, E₄ and E₆, not as an
+    abstract normalised generator of S_k; Basic.lean shows that this product is, up to a
+    constant, E₄^(a+3)·E₆^b − E_k. For k = 20 and 22 the modulus is the product of the two
+    primes rather than each prime separately, which is equivalent.
+
+review:
+  status: "self-assessed"
+  reviewers: []
+  notes: "Not independently reviewed."
+
+alignment:
+  namespace: "RamanujanCongruences"
+  statements:
+    - source: "Ramanujan (1916): τ(n) ≡ σ₁₁(n) (mod 691)"
+      lean: "RamanujanCongruences.congr_12"
+      module: "MorleySmithFormal.RamanujanCongruences.Challenge"
+      status: "proved"
+    - source: "Weight 16, Δ·E₄: coefficients ≡ σ₁₅(n) (mod 3617)"
+      lean: "RamanujanCongruences.congr_16"
+      module: "MorleySmithFormal.RamanujanCongruences.Challenge"
+      status: "proved"
+    - source: "Weight 18, Δ·E₆: coefficients ≡ σ₁₇(n) (mod 43867)"
+      lean: "RamanujanCongruences.congr_18"
+      module: "MorleySmithFormal.RamanujanCongruences.Challenge"
+      status: "proved"
+    - source: "Weight 20, Δ·E₄²: coefficients ≡ σ₁₉(n) (mod 283·617)"
+      lean: "RamanujanCongruences.congr_20"
+      module: "MorleySmithFormal.RamanujanCongruences.Challenge"
+      status: "proved"
+    - source: "Weight 22, Δ·E₄·E₆: coefficients ≡ σ₂₁(n) (mod 131·593)"
+      lean: "RamanujanCongruences.congr_22"
+      module: "MorleySmithFormal.RamanujanCongruences.Challenge"
+      status: "proved"
+    - source: "Weight 26, Δ·E₄²·E₆: coefficients ≡ σ₂₅(n) (mod 657931)"
+      lean: "RamanujanCongruences.congr_26"
+      module: "MorleySmithFormal.RamanujanCongruences.Challenge"
+      status: "proved"

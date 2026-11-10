@@ -1,0 +1,105 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "Congruences are decided at the primes"
+  description: >-
+    Two multiplicative arithmetic functions with values in a commutative ring, each obeying a
+    Hecke recursion c(p^{r+2}) = c(p) c(p^{r+1}) − w(p) c(p^r) at every prime with weights
+    congruent modulo an ideal I, agree modulo I at every n as soon as they agree modulo I at
+    every prime. The proof is induction on the exponent at each prime, then multiplicativity
+    across primes (Mathlib's multiplicative_factorization), in the quotient ring R/I. A second
+    statement checks that the divisor sums σ_k obey the recursion with w(p) = p^k, so the
+    coefficients of Eisenstein series fit the hypotheses. The weight w(p) = 0 covers primes
+    dividing the level, where an eigenform's coefficients satisfy c(p^r) = c(p)^r.
+  authors:
+    - "Richard Morley-Smith"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Richard Morley-Smith"
+
+classification:
+  arxiv: ["math.NT"]
+  msc2020: ["11F33", "11F25", "11A25"]
+
+sources:
+  - title: "Congruences between multiplicative Hecke sequences are decided at the primes"
+    type: "folklore"
+    relationship: "independently-proves"
+    note: >-
+      Deducing a congruence at every n from congruences at the primes, through multiplicativity
+      and the Hecke recursion, is a standard step in the literature on congruences between
+      modular forms. No particular text was followed; the general statement for an arbitrary
+      commutative ring and ideal was written for this formalisation.
+    license: "unknown"
+    author_endorsement: "n/a"
+  - title: "A Course in Arithmetic"
+    authors:
+      - "J.-P. Serre"
+    id: "Graduate Texts in Mathematics 7, Springer (1973)"
+    type: "book"
+    location: "Chapter VII, §5"
+    relationship: "background"
+    note: "The recursion for the coefficients of a normalised Hecke eigenform of level one."
+    license: "unknown"
+    author_endorsement: "n/a"
+  - title: "A First Course in Modular Forms"
+    authors:
+      - "F. Diamond"
+      - "J. Shurman"
+    id: "Graduate Texts in Mathematics 228, Springer (2005)"
+    type: "book"
+    location: "Section 5.8"
+    relationship: "background"
+    note: "The recursion at every level, including primes dividing the level."
+    license: "unknown"
+    author_endorsement: "n/a"
+
+related_formalizations: []
+
+status:
+  scope: >-
+    Fully proved for arbitrary commutative rings and ideals. The statement is about sequences
+    and does not mention modular forms; connecting it to a particular pair of forms needs their
+    multiplicativity and recursion, which are separate results.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: ["propext", "Classical.choice", "Quot.sound"]
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["Claude (Anthropic)"]
+      framework: "Claude Code"
+      tool_setup: >-
+        The author proposed studying congruences between modular forms through the Hecke
+        recursion at the primes; Claude, through Claude Code, chose the general statement, wrote
+        and checked the Lean proofs, and the Lean kernel and Comparator verified the result.
+      cost:
+        wall_time: "under one hour"
+        spend_usd: "not tracked"
+        hardware: "local machine"
+  spend_usd: "not tracked"
+  notes: >-
+    Ramanujan's τ(n) ≡ σ₁₁(n) (mod 691), proved in the companion entry RamanujanCongruences, has
+    this shape with w(p) = p¹¹ on both sides.
+
+fidelity:
+  divergences: "none"
+
+review:
+  status: "self-assessed"
+  reviewers: []
+  notes: "Not independently reviewed."
+
+alignment:
+  namespace: "HeckePropagation"
+  statements:
+    - source: "Agreement modulo I at the primes implies agreement modulo I everywhere"
+      lean: "HeckePropagation.congr_of_prime"
+      module: "MorleySmithFormal.HeckePropagation.Challenge"
+      status: "proved"
+    - source: "σ_k(p^{r+2}) = σ_k(p) σ_k(p^{r+1}) − p^k σ_k(p^r)"
+      lean: "HeckePropagation.sigma_recursion"
+      module: "MorleySmithFormal.HeckePropagation.Challenge"
+      status: "proved"
