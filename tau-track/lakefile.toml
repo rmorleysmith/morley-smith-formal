@@ -1,0 +1,19 @@
+name = "TauTrack"
+version = "0.1.0"
+defaultTargets = ["TauTrack"]
+
+[leanOptions]
+pp.unicode.fun = true
+autoImplicit = false
+relaxedAutoImplicit = false
+
+# TauCeti tracks Mathlib master, so this track lives in its own package with TauCeti pinned.
+# Mathlib comes through TauCeti at the commit in TauCeti's manifest.
+[[require]]
+name = "TauCeti"
+git = "https://github.com/TauCetiProject/TauCeti"
+rev = "83769e442d55cda9d85b3927a93b286831c595ff"
+
+[[lean_lib]]
+name = "TauTrack"
+globs = ["TauTrack.+"]

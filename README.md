@@ -22,6 +22,20 @@ Swinnerton-Dyer (1973). What is new here is a complete, checked Lean proof. The 
 was first proved in [fugue-formal](https://github.com/rmorleysmith/fugue-formal) (Lean v4.34.1);
 the proof here generalises it to all six weights.
 
+## Results that use TauCeti
+
+The folder [`tau-track/`](tau-track) is a separate Lake package: Lean `v4.36.0-rc2`, with
+[TauCeti](https://github.com/TauCetiProject/TauCeti) pinned at commit `83769e4` and the Mathlib
+commit that TauCeti uses. The statements still use only Mathlib definitions; the proofs use
+TauCeti's Hecke operators and Sturm bound.
+
+| Result | Statement | Read first |
+|---|---|---|
+| [The newform of weight 2 and level 11](tau-track/TauTrack/LevelEleven) | `η(z)²η(11z)²` is a cusp form of weight 2 for `Γ₀(11)` with integer coefficients `a(n)`, `a(1) = 1`, `a(2) = −2`. It spans `S₂(Γ₀(11))`; a modular form of that weight and level agreeing with it up to `q²` equals it; and `a(m)a(n) = ∑ d·a(mn/d²)` over `d ∣ (m, n)`, `11 ∤ d`. | [`Challenge.lean`](tau-track/TauTrack/LevelEleven/Challenge.lean) |
+| [Ramanujan's tau function](tau-track/TauTrack/RamanujanTau) | The coefficients of `Δ` are the values of one multiplicative `τ : ℕ → ℤ` with `τ(p^(r+2)) = τ(p)τ(p^(r+1)) − p¹¹τ(p^r)`, the product formula, and `τ(n) ≡ σ₁₁(n)` mod 691. Multiplicativity and the recursion are TauCeti's. | [`Challenge.lean`](tau-track/TauTrack/RamanujanTau/Challenge.lean) |
+
+Check them with `cd tau-track && lake exe cache get && ./check.sh`.
+
 ## Check it
 
 ```bash
@@ -42,6 +56,7 @@ MorleySmithFormal/<Result>/Basic.lean          definitions and proofs
 MorleySmithFormal/<Result>/comparator.json     which theorems the Comparator checks
 MorleySmithFormal/<Result>/formalization.yaml  sources, scope, AI use
 scripts/check.sh                               build + Comparator + metadata check
+tau-track/                                     a second Lake package, same layout, with TauCeti
 ```
 
 ## How AI was used

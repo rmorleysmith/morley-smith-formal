@@ -1,0 +1,109 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "The newform of weight 2 and level 11"
+  description: >-
+    The first newform of weight 2 with trivial character, the one attached to the elliptic
+    curves of conductor 11, is constructed and characterised completely, in one statement that
+    uses only Mathlib definitions.
+    f(z) = η(z)²η(11z)² = q∏(1 − qⁿ)²(1 − q¹¹ⁿ)² (LMFDB 11.2.a.a) is a cusp form of weight 2 for
+    Γ₀(11) with integer coefficients a(n), a(1) = 1, a(2) = −2. It spans the cusp forms of weight
+    2 for Γ₀(11); a modular form of that weight and level agreeing with it up to q² (the Sturm
+    bound) equals it; and its coefficients satisfy the Hecke relations
+    a(m)a(n) = ∑_{d | (m,n), 11 ∤ d} d·a(mn/d²), hence multiplicativity and the prime-power
+    recursions. Method: (1) η² has a multiplier on SL(2,ℤ), exp(2πiψ(γ)/12), with ψ an explicit
+    function of the entries modulo 12, proved from the S and T laws and a finite check;
+    (2) for γ in Γ₀(11) the multipliers of η²(z) and η²(11z) cancel because 11 ≡ −1 (mod 12);
+    (3) vanishing at the cusps follows from f¹² = Δ(z)Δ(11z); (4) a cusp form of weight 2 and
+    level 11 with a₁ = 0 vanishes, because its norm to level one has weight 24 and order at
+    least 3 at ∞; (5) the Hecke operators preserve the one-dimensional space, and the coefficient
+    formula gives the relations; (6) integrality comes from the pentagonal number theorem.
+  authors:
+    - "Richard Morley-Smith"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Richard Morley-Smith"
+
+classification:
+  arxiv: ["math.NT"]
+  msc2020: ["11F11", "11F20", "11F25", "11F30"]
+
+sources:
+  - title: "A First Course in Modular Forms"
+    authors:
+      - "Fred Diamond"
+      - "Jerry Shurman"
+    id: "Graduate Texts in Mathematics 228, Springer, 2005"
+    type: "book"
+    relationship: "independently-proves"
+    note: >-
+      Standard reference for S₂(Γ₀(11)) being spanned by η(z)²η(11z)² and for the Hecke
+      relations. The Lean proof does not follow the text: it avoids the genus formula and the
+      general eta multiplier, using the steps listed in the description. Section numbers were
+      not checked for this file.
+    license: "unknown"
+    author_endorsement: "n/a"
+
+related_formalizations:
+  - id: "https://github.com/TauCetiProject/TauCeti/tree/83769e442d55cda9d85b3927a93b286831c595ff"
+    relationship: "builds-on"
+    note: >-
+      Imported as a dependency. Used: η(−1/z)² = −iz·η(z)², level raising of cusp forms,
+      conjugation of Γ₀(11) by diag(11,1), the Sturm bound for finite-index subgroups, the
+      decomposition of the norm to level one at the cusp, the index of Γ₀(p), the Hecke
+      operators on S_k(N,χ) with their coefficient formula, and the identification of the
+      trivial-character space with S_k(Γ₀(N)). New here: the multiplier of η² on SL(2,ℤ), the
+      Γ₀(11)-invariance and cuspidality of η(z)²η(11z)², the vanishing criterion for cusp
+      forms of weight 2 and level 11, dimension one, the eigenform relations and integrality.
+      A search of this TauCeti commit and its Mathlib on 10 November 2026 found no eta quotient
+      proved modular at a level above one, no transformation law for η under a general element
+      of SL(2,ℤ), and no explicit newform of level above one.
+
+status:
+  scope: >-
+    Fully proved. The statement is an existence statement; the form is pinned down by its first
+    clause (its values are η(z)²η(11z)²) and the coefficients by the second. Not included: the
+    equality of a(p) with p + 1 − #E(𝔽_p) for the elliptic curve of conductor 11 (Eichler);
+    the congruence a(n) ≡ σ₁(n) − 11σ₁(n/11) (mod 5); the operator form of the Hecke
+    statement, which is proved in TauTrack.LevelEleven.Hecke but is not a selected statement
+    because it needs TauCeti's definitions; and other levels (the cancellation of multipliers
+    is proved for 11 only).
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: ["propext", "Classical.choice", "Quot.sound"]
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["Claude (Anthropic)"]
+      framework: "Claude Code"
+      tool_setup: >-
+        The author asked for the level-11 newform determined at the Sturm bound and the
+        constructions that follow from it; Claude, through Claude Code, surveyed Mathlib and
+        TauCeti, chose the proof route, wrote the statement and the Lean proofs, and the Lean
+        kernel and Comparator verified the result.
+      cost:
+        wall_time: "a few hours"
+        spend_usd: "not tracked"
+        hardware: "local machine"
+  spend_usd: "not tracked"
+  notes: "The Challenge imports only Mathlib; the proof depends on TauCeti (AI-written, Apache-2.0)."
+
+fidelity:
+  divergences: >-
+    The Hecke eigenform property is stated on the coefficients, because Mathlib has no Hecke
+    operators at level 11; the operator statement is in TauTrack.LevelEleven.Hecke.
+
+review:
+  status: "self-assessed"
+  reviewers: []
+  notes: "Not independently reviewed."
+
+alignment:
+  namespace: "LevelEleven"
+  statements:
+    - source: "S₂(Γ₀(11)) = ℂ·η(z)²η(11z)², integrality, Sturm determination, Hecke relations"
+      lean: "LevelEleven.exists_newform"
+      module: "TauTrack.LevelEleven.Challenge"
+      status: "proved"

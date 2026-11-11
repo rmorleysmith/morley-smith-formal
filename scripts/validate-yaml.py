@@ -38,7 +38,8 @@ root = pathlib.Path(__file__).resolve().parent.parent
 schema = json.loads((root / "scripts/schema/formalization-v0.4.schema.json").read_text())
 validator = jsonschema.Draft7Validator(schema)
 status = 0
-for f in sorted(root.glob("MorleySmithFormal/*/formalization.yaml")):
+for f in sorted([*root.glob("MorleySmithFormal/*/formalization.yaml"),
+                 *root.glob("tau-track/TauTrack/*/formalization.yaml")]):
     data = yaml.safe_load(f.read_text())
     errors = [f"{list(e.path)}: {e.message}" for e in validator.iter_errors(data)] + palomar_errors(data)
     print(("PASS  " if not errors else "FAIL  ") + f.parent.name + "  formalization.yaml")

@@ -1,0 +1,106 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "Ramanujan's tau function as an integer-valued multiplicative function"
+  description: >-
+    The coefficients of the modular discriminant Δ = q∏(1 − qⁿ)²⁴ = ∑τ(n)qⁿ are the values of a
+    single arithmetic function τ : ℕ → ℤ that is multiplicative, satisfies
+    τ(p^(r+2)) = τ(p)τ(p^(r+1)) − p¹¹τ(p^r) at every prime, satisfies the product formula
+    τ(m)τ(n) = ∑_{d | (m,n)} d¹¹ τ(mn/d²) for all m and n, and satisfies Ramanujan's congruence
+    τ(n) ≡ σ₁₁(n) (mod 691). Integrality, multiplicativity and the recursion are transferred
+    from TauCeti's results on the complex coefficients. The product formula is proved from
+    TauCeti's coefficient formula for the level-one Hecke operators, after showing with the Sturm
+    bound that T_n Δ = τ(n)Δ. The congruence is proved from the identity
+    E₄³ = E₁₂ + (720 − 65520/691)Δ, also by the Sturm bound, and the integrality of the
+    coefficients of E₄³.
+  authors:
+    - "Richard Morley-Smith"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Richard Morley-Smith"
+
+classification:
+  arxiv: ["math.NT"]
+  msc2020: ["11F11", "11F25", "11F33"]
+
+sources:
+  - title: "On Mr. Ramanujan's empirical expansions of modular functions"
+    authors:
+      - "L. J. Mordell"
+    id: "Proceedings of the Cambridge Philosophical Society 19 (1917), 117–124"
+    type: "paper"
+    relationship: "independently-proves"
+    note: >-
+      Proof of the multiplicativity and the prime-power recursion that Ramanujan conjectured.
+      The Lean proof goes through Hecke operators in their modern form, not the text of the
+      paper. The page range was not checked for this file.
+    license: "unknown"
+    author_endorsement: "n/a"
+  - title: "On certain arithmetical functions"
+    authors:
+      - "S. Ramanujan"
+    id: "Transactions of the Cambridge Philosophical Society 22 (1916)"
+    type: "paper"
+    relationship: "independently-proves"
+    note: "Source of the conjectured relations and of the congruence modulo 691."
+    license: "unknown"
+    author_endorsement: "n/a"
+
+related_formalizations:
+  - id: "https://github.com/TauCetiProject/TauCeti/tree/83769e442d55cda9d85b3927a93b286831c595ff"
+    relationship: "builds-on"
+    note: >-
+      Imported as a dependency. Used: integrality of the coefficients of Δ, their
+      multiplicativity and prime-power recursion (LevelOne/QExpansion.lean,
+      LevelOne/DiscriminantEigenform.lean), the coefficient formula for the level-one Hecke
+      operators (LevelOne/Hecke.lean), and the q-expansions of E₄³ and E₁₂. New here: τ bundled
+      as an integer-valued arithmetic function, the product formula for τ, and the congruence
+      modulo 691.
+  - id: "https://github.com/rmorleysmith/morley-smith-formal"
+    relationship: "other"
+    note: >-
+      RamanujanCongruences proves the congruence modulo 691 (and five others) against Mathlib
+      alone, by a different route; it does not prove multiplicativity.
+
+status:
+  scope: >-
+    Fully proved. The single statement is an existence statement; the function is pinned down by
+    its first clause (its values are the coefficients of Δ).
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: ["propext", "Classical.choice", "Quot.sound"]
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["Claude (Anthropic)"]
+      framework: "Claude Code"
+      tool_setup: >-
+        The author asked for the tau function with its multiplicative relations as the next
+        step; Claude, through Claude Code, surveyed Mathlib and TauCeti, wrote the statement and
+        the Lean proofs, and the Lean kernel and Comparator verified the result.
+      cost:
+        wall_time: "about one hour"
+        spend_usd: "not tracked"
+        hardware: "local machine"
+  spend_usd: "not tracked"
+  notes: "The Challenge imports only Mathlib; the proof depends on TauCeti (AI-written, Apache-2.0)."
+
+fidelity:
+  divergences: >-
+    The four properties are stated together for one existentially quantified function rather
+    than for a named definition, so that the Challenge needs no new definitions.
+
+review:
+  status: "self-assessed"
+  reviewers: []
+  notes: "Not independently reviewed."
+
+alignment:
+  namespace: "RamanujanTau"
+  statements:
+    - source: "Mordell (1917); Ramanujan (1916): multiplicativity, recursion, product formula, congruence mod 691"
+      lean: "RamanujanTau.exists_tau"
+      module: "TauTrack.RamanujanTau.Challenge"
+      status: "proved"

@@ -1,0 +1,6 @@
+{
+  "challenge_module": "TauTrack.LevelEleven.Challenge",
+  "solution_module": "TauTrack.LevelEleven.Solution",
+  "theorem_names": ["LevelEleven.exists_newform"],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"]
+}

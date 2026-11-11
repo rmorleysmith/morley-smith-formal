@@ -1,0 +1,6 @@
+{
+  "challenge_module": "TauTrack.RamanujanTau.Challenge",
+  "solution_module": "TauTrack.RamanujanTau.Solution",
+  "theorem_names": ["RamanujanTau.exists_tau"],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"]
+}
