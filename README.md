@@ -14,7 +14,7 @@ standard axioms (`propext`, `Classical.choice`, `Quot.sound`).
 | Result | Statement | Read first |
 |---|---|---|
 | [Congruences are decided at the primes](MorleySmithFormal/HeckePropagation) | Two multiplicative sequences in a commutative ring, each obeying a Hecke recursion `c(p^{r+2}) = c(p) c(p^{r+1}) − w(p) c(p^r)` with weights congruent mod an ideal `I`, that agree mod `I` at every prime agree mod `I` at every `n`. The divisor sums `σ_k` obey the recursion with `w(p) = p^k`. | [`Challenge.lean`](MorleySmithFormal/HeckePropagation/Challenge.lean) |
-| [Ramanujan's congruences](MorleySmithFormal/RamanujanCongruences) | For `k = 12, 16, 18, 20, 22, 26`, the coefficients of the level-one cusp form `Δ · E₄^a · E₆^b` of weight `k` are integers congruent to `σ_{k−1}(n)` modulo 691, 3617, 43867, 283·617, 131·593 and 657931, the numerators of `B_k / 2k`. | [`Challenge.lean`](MorleySmithFormal/RamanujanCongruences/Challenge.lean) |
+| [Ramanujan's congruences](MorleySmithFormal/RamanujanCongruences) | If `M_{k−12}` has rank one and `2k / B_k = D / ℓ` in lowest terms, the coefficients of `Δ · E₄^a · E₆^b` are integers congruent to `σ_{k−1}(n)` modulo `ℓ`. So for `k = 12, 16, 18, 20, 22, 26`, the coefficients of the level-one cusp form `Δ · E₄^a · E₆^b` of weight `k` are integers congruent to `σ_{k−1}(n)` modulo 691, 3617, 43867, 283·617, 131·593 and 657931, the numerators of `B_k / 2k`. | [`Challenge.lean`](MorleySmithFormal/RamanujanCongruences/Challenge.lean) |
 
 Both are known mathematics: the first is a standard step in the theory of congruences between
 modular forms, and the second goes back to Ramanujan (1916, the case `k = 12`) and

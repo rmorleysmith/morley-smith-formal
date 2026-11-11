@@ -2,6 +2,7 @@
   "challenge_module": "MorleySmithFormal.RamanujanCongruences.Challenge",
   "solution_module": "MorleySmithFormal.RamanujanCongruences.Solution",
   "theorem_names": [
+    "RamanujanCongruences.congr_of",
     "RamanujanCongruences.congr_12",
     "RamanujanCongruences.congr_16",
     "RamanujanCongruences.congr_18",
