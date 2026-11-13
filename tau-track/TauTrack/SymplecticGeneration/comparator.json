@@ -1,0 +1,6 @@
+{
+  "challenge_module": "TauTrack.SymplecticGeneration.Challenge",
+  "solution_module": "TauTrack.SymplecticGeneration.Solution",
+  "theorem_names": ["SymplecticGeneration.closure_eq_top"],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"]
+}

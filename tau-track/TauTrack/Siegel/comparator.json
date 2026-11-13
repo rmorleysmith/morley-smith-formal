@@ -1,0 +1,6 @@
+{
+  "challenge_module": "TauTrack.Siegel.Challenge",
+  "solution_module": "TauTrack.Siegel.Solution",
+  "theorem_names": ["SiegelHalfSpace.isUnit_den", "SiegelHalfSpace.act_mem", "SiegelHalfSpace.act_one", "SiegelHalfSpace.act_mul"],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"]
+}

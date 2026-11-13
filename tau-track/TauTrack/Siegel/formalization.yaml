@@ -1,0 +1,98 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "The symplectic group acts on the Siegel upper half-space"
+  description: >-
+    The Siegel upper half-space ℍ_n is the set of symmetric complex n × n matrices Z with
+    positive definite imaginary part. For a real symplectic matrix M = (A B; C D), the matrix
+    CZ + D is invertible, (AZ + B)(CZ + D)⁻¹ is again in ℍ_n, the identity acts trivially and
+    (MN)·Z = M·(N·Z). The proof rests on one identity,
+    (CZ + D)ᴴ(AZ + B) − (AZ + B)ᴴ(CZ + D) = Z − Zᴴ, which gives invertibility and
+    Im(M·Z) = (CZ + D)⁻ᴴ · Im Z · (CZ + D)⁻¹. This is the foundation for Siegel modular forms;
+    it is a textbook result and is not intended as a registry entry on its own.
+  authors:
+    - "Richard Morley-Smith"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Richard Morley-Smith"
+
+classification:
+  arxiv: ["math.NT"]
+  msc2020: ["11F46", "32M15"]
+
+sources:
+  - title: "Introductory Lectures on Siegel Modular Forms"
+    authors:
+      - "H. Klingen"
+    id: "Cambridge Studies in Advanced Mathematics 20, Cambridge University Press (1990)"
+    type: "book"
+    relationship: "independently-proves"
+    note: >-
+      Standard reference for the action of the symplectic group on the Siegel upper
+      half-space. The Lean proof was written without the text; chapter and page were not
+      checked for this file.
+    license: "unknown"
+    author_endorsement: "n/a"
+
+related_formalizations:
+  - id: "https://github.com/Cobord/ZetaThetaFunctions"
+    relationship: "other"
+    note: >-
+      Reported (scan of 10 November 2026) to contain the Siegel upper half-space and the
+      action of Sp(2g, ℝ). Not used and not compared in detail.
+
+status:
+  scope: >-
+    Fully proved for every finite index type n. Also in Basic.lean: the MulAction instance of
+    Matrix.symplecticGroup n ℝ on the subtype, and the formula for the imaginary part. Not
+    included: the topology and complex structure of ℍ_n, Siegel modular forms, theta series.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: ["propext", "Classical.choice", "Quot.sound"]
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["Claude (Anthropic)"]
+      framework: "Claude Code"
+      tool_setup: >-
+        The author asked for Siegel modular forms, starting from the Siegel upper half-space;
+        Claude, through Claude Code, wrote the statements and the Lean proofs, and the Lean
+        kernel and Comparator verified the result.
+      cost:
+        wall_time: "under one hour"
+        spend_usd: "not tracked"
+        hardware: "local machine"
+  spend_usd: "not tracked"
+  notes: "Uses Mathlib only, but lives in the TauCeti package so that later stages can use TauCeti."
+
+fidelity:
+  divergences: >-
+    The matrix M is any real 2n × 2n matrix in Mathlib's symplecticGroup, with its blocks read
+    off by toBlocks; Mathlib's convention is M J Mᵀ = J with J = (0 −1; 1 0).
+
+review:
+  status: "self-assessed"
+  reviewers: []
+  notes: "Not independently reviewed."
+
+alignment:
+  namespace: "SiegelHalfSpace"
+  statements:
+    - source: "CZ + D is invertible for Z in ℍ_n"
+      lean: "SiegelHalfSpace.isUnit_den"
+      module: "TauTrack.Siegel.Challenge"
+      status: "proved"
+    - source: "(AZ + B)(CZ + D)⁻¹ is in ℍ_n"
+      lean: "SiegelHalfSpace.act_mem"
+      module: "TauTrack.Siegel.Challenge"
+      status: "proved"
+    - source: "The identity acts trivially"
+      lean: "SiegelHalfSpace.act_one"
+      module: "TauTrack.Siegel.Challenge"
+      status: "proved"
+    - source: "(MN)·Z = M·(N·Z)"
+      lean: "SiegelHalfSpace.act_mul"
+      module: "TauTrack.Siegel.Challenge"
+      status: "proved"

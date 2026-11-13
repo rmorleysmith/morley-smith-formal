@@ -1,0 +1,6 @@
+{
+  "challenge_module": "TauTrack.SiegelTheta.Challenge",
+  "solution_module": "TauTrack.SiegelTheta.Solution",
+  "theorem_names": ["SiegelTheta.summable_norm", "SiegelTheta.differentiableOn", "SiegelTheta.map_symplectic", "SiegelTheta.bounded"],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"]
+}
