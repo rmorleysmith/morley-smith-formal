@@ -1,0 +1,6 @@
+{
+  "challenge_module": "TauTrack.RamanujanLValues.Challenge",
+  "solution_module": "TauTrack.RamanujanLValues.Solution",
+  "theorem_names": ["RamanujanLValues.L_four", "RamanujanLValues.L_six", "RamanujanLValues.L_five"],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"]
+}

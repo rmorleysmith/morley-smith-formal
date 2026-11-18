@@ -1,0 +1,126 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "Rational ratios of critical values of Ramanujan's L-function"
+  description: >-
+    Let Δ = q∏(1 − qⁿ)²⁴ = ∑τ(n)qⁿ and let L(Δ, s) be its L-function, the entire function equal
+    to ∑τ(n)n^{−s} for Re s > 13/2 (Mathlib's ModularForm.L of CuspForm.discriminant). Three
+    identities are proved: L(Δ, 4) = (25π²/72)·L(Δ, 2), L(Δ, 6) = (π⁴/18)·L(Δ, 2) and
+    L(Δ, 5) = (3π²/14)·L(Δ, 3). They are instances of Manin's theorem on the periods of Δ.
+    Method: (1) the coefficients of the period polynomial r_Δ(X, Y) = ∫₀^{i∞} Δ(τ)(X − τY)¹⁰ dτ
+    are the completed values Λ(Δ, s), s = 1, …, 11; (2) r_Δ satisfies the period relations
+    P + P|S = 0 and P + P|U + P|U² = 0; (3) the space of such polynomials of degree 10 modulo
+    X¹⁰ − Y¹⁰ has dimension 2 (Eichler–Shimura and dim S₁₂ = 1); (4) P⁺ = X²Y²(X² − Y²)³ and
+    P⁻ = 4X⁹Y − 25X⁷Y³ + 42X⁵Y⁵ − 25X³Y⁷ + 4XY⁹ satisfy the relations, and they are independent
+    modulo X¹⁰ − Y¹⁰ because an SL(2, ℤ)-invariant pairing of them is nonzero: P⁻ is written as
+    an integer combination of tenth powers of linear forms, and pairing with such a power is
+    evaluation at a point; (5) so r_Δ = a·P⁺ + b·P⁻ modulo X¹⁰ − Y¹⁰, and comparing coefficients
+    gives the ratios.
+  authors:
+    - "Richard Morley-Smith"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Richard Morley-Smith"
+
+classification:
+  arxiv: ["math.NT"]
+  msc2020: ["11F67", "11F11", "11F66"]
+
+sources:
+  - title: "Periods of parabolic forms and p-adic Hecke series"
+    authors:
+      - "Yu. I. Manin"
+    id: "Mat. Sb. (N.S.) 92(134) (1973), 378–401"
+    type: "paper"
+    relationship: "independently-proves"
+    note: >-
+      Source of the theorem that the periods of Δ of each parity are rational multiples of one
+      another. The paper was not consulted for this file; the citation is the one given in
+      TauCeti's module on period polynomials and L-values. The Lean proof uses only the period
+      relations and an explicit basis in degree 10.
+    license: "unknown"
+    author_endorsement: "n/a"
+  - title: "Modular forms with rational periods"
+    authors:
+      - "W. Kohnen"
+      - "D. Zagier"
+    id: "in Modular Forms (R. A. Rankin, ed.), Ellis Horwood, 1984, 197–249"
+    type: "paper"
+    relationship: "independently-proves"
+    note: >-
+      Standard reference for period polynomials and for the two period polynomials of Δ. Not
+      consulted for this file; the citation is the one given in TauCeti. Section numbers were
+      not checked.
+    license: "unknown"
+    author_endorsement: "n/a"
+
+related_formalizations:
+  - id: "https://github.com/TauCetiProject/TauCeti/tree/83769e442d55cda9d85b3927a93b286831c595ff"
+    relationship: "builds-on"
+    note: >-
+      Imported as a dependency. Used: period polynomials and the period polynomial of a cusp
+      form with its coefficients as completed L-values, the Eichler–Shimura isomorphism at
+      level one, the dimension formula for cusp forms, and the map from functionals on binary
+      forms to binary forms with its equivariance. New here: the SL(2, ℤ)-invariant pairing on
+      binary forms and its reproducing property, the antisymmetric pairing on period
+      polynomials modulo X^w − Y^w, the two explicit period polynomials of degree 10 with their
+      pairing, and the three identities. A search of this TauCeti commit and its Mathlib on
+      18 November 2026 found no ratio of critical L-values of a cusp form.
+
+status:
+  scope: >-
+    Fully proved. Not included: the values at s = 1 and s = 11, whose ratio to the other odd
+    values involves the prime 691 and does not follow from the period relations alone; the
+    same statements for other eigenforms; any statement about the transcendence or
+    independence of L(Δ, 2) and L(Δ, 3).
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: ["propext", "Classical.choice", "Quot.sound"]
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["Claude (Anthropic)"]
+      framework: "Claude Code"
+      tool_setup: >-
+        The author asked for the Hodge and lattice structure on the cohomology attached to
+        cusp forms and for the numerical values of Ramanujan's L-function. Claude, through
+        Claude Code, computed the values numerically, found the route through explicit period
+        polynomials, checked each formula in exact arithmetic before formalising it, and wrote
+        the statements and the Lean proofs; the Lean kernel and Comparator verified the result.
+      cost:
+        wall_time: "about two days, as part of a longer session"
+        spend_usd: "not tracked"
+        hardware: "local machine"
+  spend_usd: "not tracked"
+  notes: "The Challenge imports only Mathlib; the proof depends on TauCeti (AI-written, Apache-2.0)."
+
+fidelity:
+  divergences: >-
+    The identities are stated for Mathlib's ModularForm.L, which is the analytic continuation
+    of the Dirichlet series; the hypothesis hk : 0 < 12 is the weight positivity that
+    ModularForm.L takes as an argument. Only three ratios are selected as statements; the
+    relations for the completed function at s = 2, …, 10 are in
+    TauTrack.Cohomology.DeltaLValues.
+
+review:
+  status: "self-assessed"
+  reviewers: []
+  notes: "Not independently reviewed."
+
+alignment:
+  namespace: "RamanujanLValues"
+  statements:
+    - source: "Manin's periods theorem for Δ, even critical integers: L(Δ, 4)/L(Δ, 2)"
+      lean: "RamanujanLValues.L_four"
+      module: "TauTrack.RamanujanLValues.Challenge"
+      status: "proved"
+    - source: "Manin's periods theorem for Δ, even critical integers: L(Δ, 6)/L(Δ, 2)"
+      lean: "RamanujanLValues.L_six"
+      module: "TauTrack.RamanujanLValues.Challenge"
+      status: "proved"
+    - source: "Manin's periods theorem for Δ, odd critical integers: L(Δ, 5)/L(Δ, 3)"
+      lean: "RamanujanLValues.L_five"
+      module: "TauTrack.RamanujanLValues.Challenge"
+      status: "proved"

@@ -1,6 +1,9 @@
 module
 
-public import Mathlib
+public import Mathlib.NumberTheory.ModularForms.Discriminant
+public import Mathlib.NumberTheory.ModularForms.QExpansion
+public import Mathlib.NumberTheory.ArithmeticFunction.Misc
+public import Mathlib.Data.Int.ModEq
 
 /-!
 # Challenge: Ramanujan's tau function is an integer-valued multiplicative function

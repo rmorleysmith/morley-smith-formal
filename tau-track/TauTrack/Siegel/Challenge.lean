@@ -1,6 +1,8 @@
 module
 
-public import Mathlib
+public import Mathlib.LinearAlgebra.SymplecticGroup
+public import Mathlib.LinearAlgebra.Matrix.PosDef
+public import Mathlib.Analysis.Complex.Basic
 
 /-!
 # Challenge: the symplectic group acts on the Siegel upper half-space

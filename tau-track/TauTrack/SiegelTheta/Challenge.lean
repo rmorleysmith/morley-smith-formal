@@ -1,6 +1,13 @@
 module
 
-public import Mathlib
+public import Mathlib.LinearAlgebra.SymplecticGroup
+public import Mathlib.LinearAlgebra.Matrix.PosDef
+public import Mathlib.Algebra.Module.ZLattice.Basic
+public import Mathlib.Analysis.InnerProductSpace.Basic
+public import Mathlib.Analysis.Calculus.FDeriv.Basic
+public import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
+public import Mathlib.Topology.Algebra.InfiniteSum.Basic
+public import Mathlib.Analysis.CStarAlgebra.Classes
 
 /-!
 # Challenge: the theta series of an even unimodular lattice is a Siegel modular form
