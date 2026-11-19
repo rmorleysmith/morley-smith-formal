@@ -41,6 +41,9 @@ statement needs.
 | [The symplectic group acts on the Siegel upper half-space](tau-track/TauTrack/Siegel) | For `M = (A B; C D)` real symplectic and `Z` symmetric with `Im Z` positive definite: `CZ + D` is invertible, `(AZ + B)(CZ + D)⁻¹` is again such a matrix, and this is a group action. A foundation for the two results above. | [`Challenge.lean`](tau-track/TauTrack/Siegel/Challenge.lean) |
 
 Check them with `cd tau-track && lake exe cache get && ./check.sh`.
+`check.sh` skips the comparator for a result that carries a `CI-SKIP` file, because its kernel
+replay needs more memory than a CI runner has; the file says why. The Ramanujan `L`-values result
+is such a result: check it locally with `lake comparator --config=TauTrack/RamanujanLValues/comparator.json`.
 
 ## Check it
 

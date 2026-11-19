@@ -1,0 +1,5 @@
+kernel replay needs about 30 GB of memory, more than a CI runner has; passes locally
+The comparator's leanchecker re-checks every declaration the proof depends on. For this result
+the cost comes from TauCeti's period polynomial (TauCeti.periodPolynomial, pinned commit
+83769e4): re-checking it alone took over 14 minutes and 28 GB on 19 November 2026. The comparator
+accepts the result locally ("Your solution is okay!", 18 November 2026).
