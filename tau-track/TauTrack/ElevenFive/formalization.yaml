@@ -1,0 +1,110 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "The Eisenstein congruence modulo 5 for the newform of level 11"
+  description: >-
+    The newform f(z) = η(z)²η(11z)² = q∏(1 − qⁿ)²(1 − q¹¹ⁿ)² = ∑a(n)qⁿ of weight 2 and level 11
+    (LMFDB 11.2.a.a, the modular form of the elliptic curves of conductor 11) is congruent
+    modulo 5 to the Eisenstein series of its level: a(n) ≡ ∑_{d | n, 11 ∤ d} d (mod 5) for every
+    n ≥ 1, and in particular a(p) ≡ 1 + p (mod 5) for every prime p ≠ 11. It is the weight-2,
+    level-11 analogue of Ramanujan's τ(n) ≡ σ₁₁(n) (mod 691); 5 is the numerator of (11 − 1)/12.
+    Method, as for 691: (1) the lattice L = B ⊕ B with B = (2 1; 1 6), the norm form of
+    x² + xy + 3y² of discriminant −11, is even of rank 4, level dividing 11 and determinant 11², so
+    its theta series θ is a modular form of weight 2 on Γ₀(11) with trivial character
+    (Hecke–Schoeneberg), with integer coefficients r(n) and r(0) = 1; (2) at prime level a weight-2
+    form minus the Eisenstein multiple with the same constant term at ∞ is a cusp form, so
+    θ = Ẽ + c·f with Ẽ = (E₂(z) − 11E₂(11z))/(−10) = 1 + (12/5)∑σ*(n)qⁿ, because the cusp forms are
+    the multiples of f; (3) comparing coefficients, 5r(n) = 12σ*(n) + (5r(1) − 12)a(n), so
+    5 divides 12(σ*(n) − a(n)).
+  authors:
+    - "Richard Morley-Smith"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Richard Morley-Smith"
+
+classification:
+  arxiv: ["math.NT"]
+  msc2020: ["11F11", "11F27", "11F33"]
+
+sources:
+  - title: "Modular curves and the Eisenstein ideal"
+    authors:
+      - "Barry Mazur"
+    id: "Publications Mathématiques de l'IHÉS 47 (1977), 33–186, doi:10.1007/BF02684339"
+    type: "paper"
+    relationship: "independently-proves"
+    note: >-
+      For prime N, the Eisenstein ideal of the Hecke algebra of level N has index the numerator n
+      of (N − 1)/12, which gives congruences a(p) ≡ 1 + p (mod n) between the cusp forms and the
+      Eisenstein series of level N; for N = 11, n = 5. The Lean proof does not use that theory:
+      it is the elementary argument through an exact identity in M₂(Γ₀(11)) with a theta series,
+      as for 691. The exact form of the statement in the paper, and its section and page, were
+      not checked for this file. The rational point of order 5 on the curves of conductor 11
+      (LMFDB 11.a2, torsion of order 5) is the geometric side of the same congruence and is not
+      used.
+    license: "unknown"
+    author_endorsement: "n/a"
+
+related_formalizations:
+  - id: "https://github.com/TauCetiProject/TauCeti/tree/83769e442d55cda9d85b3927a93b286831c595ff"
+    relationship: "builds-on"
+    note: >-
+      Imported as a dependency. Used: integral lattices from a Gram matrix with their level,
+      determinant and real model; the Hecke–Schoeneberg transformation law of theta series under
+      Γ₀(N) with the theta character trivial for a square discriminant; the corrected weight-two
+      Eisenstein series E₂(z) − pE₂(pz) on Γ₀(p) with its q-expansion; and the criterion that at
+      prime level a weight-two form minus the right Eisenstein multiple is a cusp form. New here:
+      the level-11 lattice and its theta series as a form on Γ₀(11), the decomposition
+      θ = Ẽ + c·f, and the congruence.
+  - id: "https://github.com/rmorleysmith/morley-smith-formal/tree/main/tau-track/TauTrack/LevelEleven"
+    relationship: "builds-on"
+    note: >-
+      The author's Palomar entry for the newform of level 11: the cusp form η(z)²η(11z)² on
+      Γ₀(11), its integer coefficients, and the fact that it spans S₂(Γ₀(11)). That entry lists
+      this congruence as not included.
+
+status:
+  scope: >-
+    Fully proved. The statement is an existence statement; the form is pinned down by its first
+    clause (its values are η(z)²η(11z)²) and the coefficients by the second. Not included: the
+    equality of a(p) with p + 1 − #E(𝔽_p) for the elliptic curves of conductor 11 (Eichler), so
+    the statement 5 | #E(𝔽_p) is not derived from it; the identity 5θ = 5Ẽ + 8f, of which only
+    θ = Ẽ + c·f is used (r(1) = 4 is not proved); other primes N with the numerator of (N − 1)/12.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: ["propext", "Classical.choice", "Quot.sound"]
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["Claude (Anthropic)"]
+      framework: "Claude Code"
+      tool_setup: >-
+        The author asked for this congruence as a result; Claude, through Claude Code, checked it
+        numerically, found the theta-series route, wrote the statement and the Lean proofs, and
+        the Lean kernel and Comparator verified the result.
+      cost:
+        wall_time: "a few hours"
+        spend_usd: "not tracked"
+        hardware: "local machine"
+  spend_usd: "not tracked"
+  notes: "The Challenge imports only Mathlib; the proof depends on TauCeti (AI-written, Apache-2.0)."
+
+fidelity:
+  divergences: >-
+    None for the statement. The divisor sum ∑_{d | n, 11 ∤ d} d is written with Finset.filter on
+    Nat.divisors.
+
+review:
+  status: "self-assessed"
+  reviewers: []
+  notes: "Not independently reviewed."
+
+alignment:
+  namespace: "ElevenFive"
+  statements:
+    - source: "a(n) ≡ σ*(n) (mod 5) and a(p) ≡ 1 + p (mod 5) for the newform 11.2.a.a"
+      lean: "ElevenFive.eisenstein_congruence_mod_five"
+      module: "TauTrack.ElevenFive.Challenge"
+      status: "proved"

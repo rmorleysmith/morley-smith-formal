@@ -1,0 +1,6 @@
+{
+  "challenge_module": "TauTrack.ElevenFive.Challenge",
+  "solution_module": "TauTrack.ElevenFive.Solution",
+  "theorem_names": ["ElevenFive.eisenstein_congruence_mod_five"],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"]
+}
