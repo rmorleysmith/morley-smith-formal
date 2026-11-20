@@ -1,0 +1,6 @@
+{
+  "challenge_module": "TauTrack.ElevenFunctionalEquation.Challenge",
+  "solution_module": "TauTrack.ElevenFunctionalEquation.Solution",
+  "theorem_names": ["ElevenFunctionalEquation.fricke_relation", "ElevenFunctionalEquation.exists_newform_functional_equation"],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"]
+}

@@ -1,0 +1,138 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "The functional equation of the L-function of the newform of level 11"
+  description: >-
+    Let f(z) = η(z)²η(11z)² = ∑a(n)qⁿ be the newform of weight 2 and level 11 (LMFDB 11.2.a.a, the
+    modular form of the elliptic curves of conductor 11), L(f, s) its L-function (Mathlib's
+    ModularForm.L, entire, equal to ∑a(n)n^{−s} for Re s > 2) and Λ(s) = (2π)^{−s}Γ(s)L(f, s) its
+    completion (Mathlib's ModularForm.Λ, the Mellin transform of t ↦ f(it)). Proved:
+    (1) the Fricke relation f(−1/(11z)) = −11z²f(z), so the Fricke involution has eigenvalue −1
+    on f; (2) the functional equation Λ(2 − s) = 11^{s−1}Λ(s) for all complex s, that is,
+    11^{s/2}Λ(s) is invariant under s ↦ 2 − s and the root number is +1; (3) L(f, 1) is a
+    positive real number; (4) 11^{s/2}Λ(s) is real for s = 1 + it, t real.
+    Method: (1) from η(−1/u)² = −iu·η(u)² at u = z and u = 11z; (2) from (1) and the functional
+    equation of an eigenvector of the Fricke operator (Hecke); (3) η(iy) is real and nonzero for
+    y > 0, so f(iy) > 0 and L(f, 1) = 2π∫₀^∞ f(iy) dy > 0; (4) the Mellin transform of a real
+    function commutes with complex conjugation, so Λ(s̄) = conj Λ(s), and 2 − s = s̄ on the
+    line Re s = 1.
+  authors:
+    - "Richard Morley-Smith"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Richard Morley-Smith"
+
+classification:
+  arxiv: ["math.NT"]
+  msc2020: ["11F66", "11F11", "11F67"]
+
+sources:
+  - title: "Über die Bestimmung Dirichletscher Reihen durch ihre Funktionalgleichung"
+    authors:
+      - "Erich Hecke"
+    id: "Mathematische Annalen 112 (1936), 664–699, doi:10.1007/BF01565437"
+    type: "paper"
+    relationship: "independently-proves"
+    note: >-
+      Source of the correspondence between modular forms and Dirichlet series with a functional
+      equation, through the Mellin transform. The bibliographic data were checked against
+      Crossref on 20 November 2026; the paper itself was not consulted for this file, and it
+      treats the full modular group and its conjugates rather than level 11 specifically.
+    license: "unknown"
+    author_endorsement: "n/a"
+  - title: "A First Course in Modular Forms"
+    authors:
+      - "Fred Diamond"
+      - "Jerry Shurman"
+    id: "Graduate Texts in Mathematics 228, Springer, 2005, Theorem 5.10.2"
+    type: "book"
+    relationship: "independently-proves"
+    note: >-
+      The functional equation of the L-function of an eigenvector of the Fricke involution on
+      Γ₁(N), with sign determined by the eigenvalue. The citation, including the theorem number,
+      is the one given in TauCeti's module on the sign of the functional equation; the book was
+      not consulted for this file.
+    license: "unknown"
+    author_endorsement: "n/a"
+  - title: "LMFDB, newform 11.2.a.a"
+    authors:
+      - "The LMFDB Collaboration"
+    id: "https://www.lmfdb.org/ModularForm/GL2/Q/holomorphic/11/2/a/a/"
+    type: "other"
+    relationship: "background"
+    note: >-
+      Records Fricke eigenvalue −1, self-duality and analytic rank 0 for this newform, which
+      agree with statements (1) to (3). Read through the LMFDB API on 20 November 2026.
+    license: "unknown"
+    author_endorsement: "n/a"
+
+related_formalizations:
+  - id: "https://github.com/TauCetiProject/TauCeti/tree/83769e442d55cda9d85b3927a93b286831c595ff"
+    relationship: "builds-on"
+    note: >-
+      Imported as a dependency. Used: η(−1/τ)² = −iτ·η(τ)²; the Fricke matrix and the normalized
+      Fricke operator on cusp forms of level Γ₁(N); the level-N completed L-function; and the
+      functional equation of a Fricke eigenvector, in TauCeti's and in Mathlib's normalisation.
+      New here: the Fricke eigenvalue of η(z)²η(11z)², the resulting functional equation for the
+      form on Γ₀(11), the positivity of the central value, the reflection Λ(s̄) = conj Λ(s) and
+      the reality on the critical line.
+  - id: "https://github.com/rmorleysmith/morley-smith-formal/tree/main/tau-track/TauTrack/LevelEleven"
+    relationship: "builds-on"
+    note: >-
+      The author's result for the newform of level 11: the cusp form η(z)²η(11z)² on Γ₀(11),
+      its integer coefficients, and the fact that it spans S₂(Γ₀(11)).
+
+status:
+  scope: >-
+    Fully proved. The second statement is an existence statement; the form is pinned down by its
+    first clause (its values are η(z)²η(11z)²). Not included: the identification of L(f, s) with
+    the Dirichlet series ∑a(n)n^{−s} for Re s > 2, which is Mathlib's CuspForm.hasSum_L; any
+    statement about the zeros of L(f, s); the value L(f, 1) = Ω/5 with Ω the real period of the
+    curve 11a1; the equality of L(f, s) with the Hasse–Weil L-function of that curve; the same
+    statements for other newforms.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: ["propext", "Classical.choice", "Quot.sound"]
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["Claude (Anthropic)"]
+      framework: "Claude Code"
+      tool_setup: >-
+        The author asked for the Hasse–Weil L-function of the curves of conductor 11 beside
+        Ramanujan's L-function, and for positivity in the explicit formula as a model. Claude,
+        through Claude Code, checked the functional equation and the low zeros numerically,
+        found the route through the eta transformation and TauCeti's Fricke operator, wrote the
+        statements and the Lean proofs, and the Lean kernel and Comparator verified the result.
+      cost:
+        wall_time: "a few hours, as part of a longer session"
+        spend_usd: "not tracked"
+        hardware: "local machine"
+  spend_usd: "not tracked"
+  notes: "The Challenge imports only Mathlib; the proof depends on TauCeti (AI-written, Apache-2.0)."
+
+fidelity:
+  divergences: >-
+    The functional equation is stated for Mathlib's ModularForm.Λ, whose normalisation omits the
+    factor 11^{s/2}; the symmetric form 11^{s/2}Λ(s) appears in the fourth clause. The hypothesis
+    hk : 0 < 2 is the weight positivity that ModularForm.Λ and ModularForm.L take as an argument.
+    The Fricke relation is stated for η on complex numbers with positive imaginary part.
+
+review:
+  status: "self-assessed"
+  reviewers: []
+  notes: "Not independently reviewed."
+
+alignment:
+  namespace: "ElevenFunctionalEquation"
+  statements:
+    - source: "Fricke relation f(−1/(11z)) = −11z²f(z) for f = η(z)²η(11z)²"
+      lean: "ElevenFunctionalEquation.fricke_relation"
+      module: "TauTrack.ElevenFunctionalEquation.Challenge"
+      status: "proved"
+    - source: "Hecke's functional equation for 11.2.a.a with root number +1; L(f, 1) > 0; reality on the critical line"
+      lean: "ElevenFunctionalEquation.exists_newform_functional_equation"
+      module: "TauTrack.ElevenFunctionalEquation.Challenge"
+      status: "proved"
