@@ -1,0 +1,6 @@
+{
+  "challenge_module": "MorleySmithFormal.ModularSystole.Challenge",
+  "solution_module": "MorleySmithFormal.ModularSystole.Solution",
+  "theorem_names": ["ModularSystole.cosh_dist_smul", "ModularSystole.four_mul_log_goldenRatio_le_dist", "ModularSystole.exists_dist_eq_four_mul_log_goldenRatio", "ModularSystole.exists_cosh_dist_smul_eq", "ModularSystole.dist_I_of_re_im", "ModularSystole.tanh_dist_I_of_re_im"],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"]
+}

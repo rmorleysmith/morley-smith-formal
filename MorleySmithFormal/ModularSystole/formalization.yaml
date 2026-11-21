@@ -1,0 +1,142 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "The shortest closed geodesic of the modular surface has length 4 log φ"
+  description: >-
+    For γ = (a b; c d) in SL(2, ℤ) with trace t = a + d acting on the upper half-plane with its
+    hyperbolic distance, and z = x + iy: (1) cosh d(z, γz) = t²/2 − 1 +
+    (c(x² + y²) + (d − a)x − b)²/(2y²); (2) if |t| > 2 then d(z, γz) ≥ 4 log φ for every z, with
+    φ the golden ratio; (3) the matrix (2 1; 1 1) moves the point i exactly 4 log φ; (4) if
+    |t| > 2 some point is moved exactly arcosh(t²/2 − 1), the translation length of γ;
+    (5) the elliptic points i and ρ = e^{2πi/3} are at distance (log 3)/2, so tanh d(i, ρ) = 1/2.
+    A hyperbolic element translates along its axis, which projects to a closed geodesic of the
+    modular surface of length the translation length; so the closed geodesics have lengths
+    2 arcosh(|t|/2) for integers |t| ≥ 3 and the shortest has length 4 log φ = 2 log φ², with φ²
+    an eigenvalue of (2 1; 1 1).
+    Method: γz − z = −(cz² + (d − a)z − b)/(cz + d) and Im γz = y/|cz + d|², so
+    cosh d(z, γz) = 1 + |cz² + (d − a)z − b|²/(2y²); the identity
+    |cz² + (d − a)z − b|² = (c|z|² + (d − a)x − b)² + (t² − 4)y², which uses ad − bc = 1, gives
+    (1). For (2), t is an integer, so t² ≥ 9 and cosh d ≥ 7/2 = cosh(4 log φ), from φ² = φ + 1.
+    For (4) the point x = (a − d)/(2c), y = √(t² − 4)/(2|c|) lies on the circle
+    c|z|² + (d − a)x − b = 0; c ≠ 0 because an integer matrix with c = 0 and determinant 1 has
+    trace ±2.
+  authors:
+    - "Richard Morley-Smith"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Richard Morley-Smith"
+
+classification:
+  arxiv: ["math.NT", "math.DG"]
+  msc2020: ["11F06", "30F35", "51M10"]
+
+sources:
+  - title: "The Geometry of Discrete Groups"
+    authors:
+      - "Alan F. Beardon"
+    id: "Graduate Texts in Mathematics 91, Springer, 1983, Chapter 7, doi:10.1007/978-1-4612-1146-4"
+    type: "book"
+    relationship: "independently-proves"
+    note: >-
+      Standard reference for the displacement of a point by a Möbius transformation and for the
+      translation length of a hyperbolic element, 2 arcosh(|t|/2). The book was not consulted
+      for this file; the chapter is the one cited by the TauCeti library for the same topic, and
+      the bibliographic data were checked against Crossref on 21 November 2026. The Lean proof is
+      a direct computation in coordinates.
+    license: "unknown"
+    author_endorsement: "n/a"
+  - title: "Class numbers of indefinite binary quadratic forms"
+    authors:
+      - "Peter Sarnak"
+    id: "Journal of Number Theory 15 (1982), 229–247, doi:10.1016/0022-314X(82)90028-2"
+    type: "paper"
+    relationship: "background"
+    note: >-
+      Uses the correspondence between closed geodesics of the modular surface and classes of
+      indefinite binary quadratic forms, with lengths twice the logarithm of a unit; the shortest
+      corresponds to the unit φ². Bibliographic data checked against Crossref on 21 November
+      2026; the paper was not consulted for this file.
+    license: "unknown"
+    author_endorsement: "n/a"
+
+related_formalizations:
+  - id: "https://github.com/TauCetiProject/TauCeti/tree/83769e442d55cda9d85b3927a93b286831c595ff"
+    relationship: "independent"
+    note: >-
+      Not a dependency. TauCeti proves, for g in SL(2, ℝ), the inequality
+      tr² − 4 ≤ 2(cosh d(gz, z) − 1) (Analysis/Complex/UpperHalfPlane/Displacement.lean) and that
+      the hyperbolic elements of a cofinite Fuchsian group move every point at least some
+      positive distance (Analysis/Complex/Fuchsian/Systole.lean). New here: the exact
+      displacement formula for SL(2, ℤ), the points attaining the minimum, and the value
+      4 log φ for the modular group. A search of that TauCeti commit and its Mathlib on
+      21 November 2026 found no statement of this value.
+
+status:
+  scope: >-
+    Fully proved. Not included: the definition of closed geodesics on the quotient surface and
+    their correspondence with conjugacy classes of hyperbolic elements, so the statement about
+    the modular surface is the statement about displacements given here; the same computation
+    for other Fuchsian groups; the reciprocal structure of the shortest geodesic (it passes
+    through the elliptic point i and is traversed in both directions).
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: ["propext", "Classical.choice", "Quot.sound"]
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["Claude (Anthropic)"]
+      framework: "Claude Code"
+      tool_setup: >-
+        The author asked how the golden ratio enters the modular group and how the Gaussian and
+        Eisenstein points are related as velocities. Claude, through Claude Code, identified the
+        shortest closed geodesic and the distance between the elliptic points, checked the values
+        numerically, found the sum-of-squares identity, wrote the statements and the Lean proofs,
+        and the Lean kernel and Comparator verified the result.
+      cost:
+        wall_time: "about an hour"
+        spend_usd: "not tracked"
+        hardware: "local machine"
+  spend_usd: "not tracked"
+  notes: "The Challenge and the proofs import only Mathlib."
+
+fidelity:
+  divergences: >-
+    Lengths of closed geodesics are expressed as displacements d(z, γz) of hyperbolic elements;
+    the quotient surface does not appear. The translation length is stated through its
+    hyperbolic cosine, t²/2 − 1, rather than as 2 arcosh(|t|/2). The elliptic point ρ is
+    described by its coordinates (real part ±1/2, imaginary part √3/2).
+
+review:
+  status: "self-assessed"
+  reviewers: []
+  notes: "Not independently reviewed."
+
+alignment:
+  namespace: "ModularSystole"
+  statements:
+    - source: "Displacement of a point by an element of the modular group"
+      lean: "ModularSystole.cosh_dist_smul"
+      module: "MorleySmithFormal.ModularSystole.Challenge"
+      status: "proved"
+    - source: "Hyperbolic elements of SL(2, ℤ) move every point at least 4 log φ"
+      lean: "ModularSystole.four_mul_log_goldenRatio_le_dist"
+      module: "MorleySmithFormal.ModularSystole.Challenge"
+      status: "proved"
+    - source: "The matrix (2 1; 1 1) moves i exactly 4 log φ"
+      lean: "ModularSystole.exists_dist_eq_four_mul_log_goldenRatio"
+      module: "MorleySmithFormal.ModularSystole.Challenge"
+      status: "proved"
+    - source: "Translation length of a hyperbolic element, attained on its axis"
+      lean: "ModularSystole.exists_cosh_dist_smul_eq"
+      module: "MorleySmithFormal.ModularSystole.Challenge"
+      status: "proved"
+    - source: "The elliptic points i and ρ are at distance (log 3)/2"
+      lean: "ModularSystole.dist_I_of_re_im"
+      module: "MorleySmithFormal.ModularSystole.Challenge"
+      status: "proved"
+    - source: "tanh d(i, ρ) = 1/2"
+      lean: "ModularSystole.tanh_dist_I_of_re_im"
+      module: "MorleySmithFormal.ModularSystole.Challenge"
+      status: "proved"

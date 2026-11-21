@@ -1,0 +1,6 @@
+{
+  "challenge_module": "TauTrack.Tones.Challenge",
+  "solution_module": "TauTrack.Tones.Solution",
+  "theorem_names": ["Tones.character_determined", "Tones.exists_pitch"],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"]
+}

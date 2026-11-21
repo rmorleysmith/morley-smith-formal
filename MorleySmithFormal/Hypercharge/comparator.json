@@ -1,0 +1,6 @@
+{
+  "challenge_module": "MorleySmithFormal.Hypercharge.Challenge",
+  "solution_module": "MorleySmithFormal.Hypercharge.Solution",
+  "theorem_names": ["Hypercharge.gauge_anomaly_iff", "Hypercharge.gravitational_anomaly", "Hypercharge.fermat_form"],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"]
+}

@@ -1,0 +1,118 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "The hypercharges of a generation of the Standard Model, from Fermat's theorem for cubes"
+  description: >-
+    One generation of the Standard Model has five left-handed Weyl fermions with rational
+    hypercharges q, u, d, l, e for Q in (3, 2), uᶜ and dᶜ in (3̄, 1), L in (1, 2), eᶜ in (1, 1).
+    The gauge anomalies cancel exactly when 2q + u + d = 0, 3q + l = 0 and
+    6q³ + 3u³ + 3d³ + 2l³ + e³ = 0. Proved: (1) these hold exactly when q = l = e = 0 and
+    d = −u, or (u, d, l, e) = (2q, −4q, −3q, 6q), or (u, d, l, e) = (−4q, 2q, −3q, 6q); the last
+    two are the hypercharges of the Standard Model up to scale and the exchange of uᶜ and dᶜ;
+    (2) the three conditions imply the mixed gravitational condition 6q + 3u + 3d + 2l + e = 0;
+    (3) after substituting l = −3q and d = −2q − u, the cubic condition is
+    e³ + (u − 2q)³ = (u + 4q)³.
+    Method: (3) is an identity of polynomials. By Fermat's theorem for cubes over ℚ, one of e,
+    u − 2q, u + 4q is zero; cubing is injective on ℚ, which gives q = 0 in the first case and
+    e = 6q in the other two. (2) is checked on the three families.
+  authors:
+    - "Richard Morley-Smith"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Richard Morley-Smith"
+
+classification:
+  arxiv: ["hep-th", "math.NT"]
+  msc2020: ["81T50", "11D41", "81V22"]
+
+sources:
+  - title: "Hypercharge quantisation and Fermat's last theorem"
+    authors:
+      - "Nakarin Lohitsiri"
+      - "David Tong"
+    id: "SciPost Physics 8 (2020), 009, doi:10.21468/SciPostPhys.8.1.009"
+    type: "paper"
+    relationship: "independently-proves"
+    note: >-
+      Source of the theorem that the gauge anomaly conditions of one generation, without the
+      gravitational condition, force the hypercharges of the Standard Model and imply the
+      gravitational condition, by Fermat's theorem for cubes. Bibliographic data checked against
+      Crossref on 20 November 2026. The paper itself was not consulted for this file: the
+      statement is known here through its title and through the Physlib file that cites it, and
+      the substitution leading to Fermat's cubic was derived for this file, so it may differ
+      from the paper's.
+    license: "unknown"
+    author_endorsement: "n/a"
+
+related_formalizations:
+  - id: "https://github.com/leanprover-community/physlib"
+    relationship: "independent"
+    note: >-
+      Not a dependency. Physlib (Physlib/Particles/StandardModel/AnomalyCancellation/NoGrav/One/,
+      read on 20 November 2026) defines the anomaly cancellation conditions of the Standard Model
+      in general and proves, for one family, that every solution of the conditions without
+      gravity satisfies the gravitational condition (SM.SMNoGrav.One.accGravSatisfied), through
+      a linear parameterisation of the solutions and Mathlib's Fermat's theorem for cubes. This
+      file states the same conditions directly as equations in five rationals, with the explicit
+      list of solutions; it does not use Physlib's definitions.
+  - id: "https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/NumberTheory/FLT/Three.lean"
+    relationship: "builds-on"
+    note: >-
+      Mathlib's proof of Fermat's last theorem for exponent 3 (fermatLastTheoremThree), with
+      its transfer from natural numbers to rationals, is the only non-elementary input.
+
+status:
+  scope: >-
+    Fully proved. The physics is in the choice of equations: the derivation of the three
+    anomaly conditions from the representations is not formalised (it is the content of
+    Physlib's definitions). Not included: more than one generation; a right-handed neutrino;
+    Witten's SU(2) condition; hypercharges that are real but not rational.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: ["propext", "Classical.choice", "Quot.sound"]
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["Claude (Anthropic)"]
+      framework: "Claude Code"
+      tool_setup: >-
+        The author proposed that the consistency conditions of the Standard Model have an
+        arithmetic origin. Claude, through Claude Code, found the theorem of Lohitsiri and Tong
+        and its formalisation in Physlib, derived the reduction to Fermat's cubic, checked it
+        numerically, wrote the statements and the Lean proofs, and the Lean kernel and
+        Comparator verified the result.
+      cost:
+        wall_time: "under an hour"
+        spend_usd: "not tracked"
+        hardware: "local machine"
+  spend_usd: "not tracked"
+  notes: "The Challenge and the proofs import only Mathlib."
+
+fidelity:
+  divergences: >-
+    The anomaly conditions are written as polynomial equations in the five hypercharges, with
+    the multiplicities of the representations as coefficients; no gauge group or representation
+    is defined. The hypercharges are rational numbers.
+
+review:
+  status: "self-assessed"
+  reviewers: []
+  notes: "Not independently reviewed."
+
+alignment:
+  namespace: "Hypercharge"
+  statements:
+    - source: "The solutions of the gauge anomaly conditions of one generation"
+      lean: "Hypercharge.gauge_anomaly_iff"
+      module: "MorleySmithFormal.Hypercharge.Challenge"
+      status: "proved"
+    - source: "The gauge conditions imply the gravitational condition (Lohitsiri and Tong)"
+      lean: "Hypercharge.gravitational_anomaly"
+      module: "MorleySmithFormal.Hypercharge.Challenge"
+      status: "proved"
+    - source: "The cubic condition is Fermat's cubic"
+      lean: "Hypercharge.fermat_form"
+      module: "MorleySmithFormal.Hypercharge.Challenge"
+      status: "proved"

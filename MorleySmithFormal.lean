@@ -4,3 +4,7 @@ public import MorleySmithFormal.HeckePropagation.Basic
 public import MorleySmithFormal.HeckePropagation.Solution
 public import MorleySmithFormal.RamanujanCongruences.Basic
 public import MorleySmithFormal.RamanujanCongruences.Solution
+public import MorleySmithFormal.ModularSystole.Basic
+public import MorleySmithFormal.ModularSystole.Solution
+public import MorleySmithFormal.Hypercharge.Basic
+public import MorleySmithFormal.Hypercharge.Solution
