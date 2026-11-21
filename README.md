@@ -19,8 +19,9 @@ only Lean's three standard axioms (`propext`, `Classical.choice`, `Quot.sound`).
 | [The least displacement of a hyperbolic element of `SL(2, ℤ)`](MorleySmithFormal/ModularSystole) | For `γ = (a b; c d)` in `SL(2, ℤ)` with trace `t`, and `z = x + iy` in the upper half-plane: `cosh d(z, γz) = t²/2 − 1 + (c(x² + y²) + (d − a)x − b)²/(2y²)`. Every element with `\|t\| > 2` moves every point at least `4 log φ`, with `φ` the golden ratio; `(2 1; 1 1)` moves `i` exactly that far; each such element has translation length `arcosh(t²/2 − 1)`. (This is the length `4 log φ` of the shortest closed geodesic of the modular surface; the surface and its geodesics are not formalised.) The elliptic points `i` and `ρ` are at distance `(log 3)/2`, so `tanh d(i, ρ) = 1/2`. | [`Challenge.lean`](MorleySmithFormal/ModularSystole/Challenge.lean) |
 | [The hypercharges of a generation of the Standard Model](MorleySmithFormal/Hypercharge) | For rational hypercharges `q, u, d, l, e` of `Q, uᶜ, dᶜ, L, eᶜ`, the gauge anomaly conditions `2q + u + d = 0`, `3q + l = 0`, `6q³ + 3u³ + 3d³ + 2l³ + e³ = 0` hold exactly when `q = l = e = 0, d = −u`, or `(u, d, l, e) = (2q, −4q, −3q, 6q)`, or `(−4q, 2q, −3q, 6q)`: the Standard Model's hypercharges up to scale and `u ↔ d`. They imply the gravitational condition. The cubic condition is Fermat's `e³ + (u − 2q)³ = (u + 4q)³`, and the proof is Mathlib's Fermat's last theorem for exponent 3. The same is proved for `N ≥ 1` colours: the cubic is `e³ + (u + (1 − N)q)³ = (u + (N + 1)q)³` and the solutions with `q ≠ 0` are `{u, d} = {(N − 1)q, −(N + 1)q}`, `l = −Nq`, `e = 2Nq`. Rational hypercharges (quantised hypercharge), one generation, no right-handed neutrino. | [`Challenge.lean`](MorleySmithFormal/Hypercharge/Challenge.lean) |
 | [The silent shells of the cubic lattice](MorleySmithFormal/SilentShells) | No integer `4^a (8b + 7)` is a sum of three squares of integers: the sphere of that squared radius about the origin contains no point of `ℤ³`. This is the elementary direction of the three-square theorem of Legendre and Gauss, by descent modulo 8 and 4. | [`Challenge.lean`](MorleySmithFormal/SilentShells/Challenge.lean) |
+| [The Fermat cubic modulo a prime `p ≡ 2 (mod 3)`](MorleySmithFormal/FermatCubicModP) | For a prime `p ≡ 2 (mod 3)`, cubing is a bijection of `ℤ/p`, and `x³ + y³ ≡ z³ (mod p)` has exactly `p²` solutions. So the projective cubic has `p + 1` points and its `L`-function has `a(p) = 0` at these primes. The cubic is the one to which the hypercharge conditions above reduce. | [`Challenge.lean`](MorleySmithFormal/FermatCubicModP/Challenge.lean) |
 
-All five are known mathematics. The first is a standard step in the theory of congruences between
+All six are known mathematics. The first is a standard step in the theory of congruences between
 modular forms, and the second goes back to Ramanujan (1916, the case `k = 12`) and
 Swinnerton-Dyer (1973); the author's earlier Lean proof of the case `k = 12` is in
 [fugue-formal](https://github.com/rmorleysmith/fugue-formal) (Lean v4.34.1), and the proof here
@@ -28,7 +29,7 @@ covers all six weights (the general statement has exactly these six instances). 
 in the modular group. The fourth is a theorem of Lohitsiri and Tong (2020);
 [Physlib](https://github.com/leanprover-community/physlib) proves its gravitational consequence
 within its own definitions of the anomaly conditions, and the statement here is the explicit list
-of solutions. The fifth is the elementary half of the three-square theorem of Legendre and Gauss.
+of solutions. The fifth is the elementary half of the three-square theorem of Legendre and Gauss. The sixth is a standard exercise.
 What is new in each case is a complete, checked Lean proof of the statement as given.
 
 ## Results that use TauCeti

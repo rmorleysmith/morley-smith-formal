@@ -1,0 +1,6 @@
+{
+  "challenge_module": "MorleySmithFormal.FermatCubicModP.Challenge",
+  "solution_module": "MorleySmithFormal.FermatCubicModP.Solution",
+  "theorem_names": ["FermatCubicModP.cube_bijective", "FermatCubicModP.card_solutions"],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"]
+}

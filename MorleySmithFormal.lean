@@ -9,3 +9,4 @@ public import MorleySmithFormal.ModularSystole.Solution
 public import MorleySmithFormal.Hypercharge.Basic
 public import MorleySmithFormal.Hypercharge.Solution
 public import MorleySmithFormal.SilentShells.Solution
+public import MorleySmithFormal.FermatCubicModP.Solution

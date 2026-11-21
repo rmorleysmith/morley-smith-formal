@@ -1,0 +1,109 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "The Fermat cubic modulo a prime p ≡ 2 (mod 3) has p² solutions"
+  description: >-
+    For a prime p ≡ 2 (mod 3): (1) cubing is a bijection of Z/p; (2) the congruence
+    x³ + y³ ≡ z³ (mod p) has exactly p² solutions (x, y, z), as many as a linear congruence.
+    Equivalently the projective cubic X³ + Y³ = Z³ has p + 1 points modulo p, so the
+    coefficient a(p) of its L-function is zero at the primes that stay prime in the Eisenstein
+    integers. Method: write p = 3m + 2; then 3(2m + 1) = 2(p − 1) + 1, so by Fermat's little
+    theorem y ↦ y^(2m+1) inverts cubing, and the solutions are the triples
+    (x, y, (x³ + y³)^(2m+1)). The cubic is the one to which the gauge anomaly conditions of one
+    generation of the Standard Model reduce (Lohitsiri and Tong).
+  authors:
+    - "Richard Morley-Smith"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Richard Morley-Smith"
+
+classification:
+  arxiv: ["math.NT"]
+  msc2020: ["11D79", "11G20", "11T06"]
+
+sources:
+  - title: "Every residue is a cube modulo a prime p ≡ 2 (mod 3)"
+    authors:
+      - "folklore"
+    id: "standard exercise in elementary number theory"
+    type: "folklore"
+    relationship: "independently-proves"
+    note: >-
+      The statements are elementary and standard: cubing is a bijection modulo such a prime
+      because 3 is coprime to p − 1, and the count of solutions follows. No specific text was
+      followed; the proof was written directly.
+    license: "n/a"
+    author_endorsement: "n/a"
+  - title: "Hypercharge quantisation and Fermat's last theorem"
+    authors:
+      - "Nakarin Lohitsiri"
+      - "David Tong"
+    id: "SciPost Physics 8 (2020), 009, doi:10.21468/SciPostPhys.8.1.009"
+    type: "paper"
+    relationship: "background"
+    note: >-
+      Source of the cubic's role in physics, not of the statements proved here: the gauge
+      anomaly conditions of one generation with rational hypercharges reduce to the Fermat
+      cubic. Read on 21 November 2026 (arXiv:1907.00514v3). The statements of this file are
+      elementary and standard (cubes modulo a prime p ≡ 2 mod 3); no source was followed for
+      them, and the proof was written directly.
+    license: "unknown"
+    author_endorsement: "n/a"
+
+related_formalizations:
+  - id: "https://github.com/leanprover-community/mathlib4"
+    relationship: "builds-on"
+    note: >-
+      Mathlib's ZMod.pow_card_sub_one_eq_one (Fermat's little theorem) is the only input. A
+      search of Mathlib on 21 November 2026 found powCoprime (the power map on a finite group
+      of order coprime to the exponent) and no count of the solutions of this congruence.
+
+status:
+  scope: >-
+    Fully proved. Not included: the primes p ≡ 1 (mod 3), where the count is
+    p² + (p − 1)A with 4p = A² + 27B², A ≡ 1 (mod 3) (Gauss); the prime 3; the L-function of
+    the cubic, of which these statements give the coefficients a(p) = 0 for p ≡ 2 (mod 3); any
+    statement about anomalies.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: ["propext", "Classical.choice", "Quot.sound"]
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["Claude (Anthropic)"]
+      framework: "Claude Code"
+      tool_setup: >-
+        The author asked for short proved statements that build towards the L-function of the
+        hypercharge cubic. Claude, through Claude Code, chose this statement, checked it
+        numerically for the primes below 400, wrote the statements and the Lean proofs, and the
+        Lean kernel and Comparator verified the result.
+      cost:
+        wall_time: "under an hour"
+        spend_usd: "not tracked"
+        hardware: "local machine"
+  spend_usd: "not tracked"
+  notes: "The Challenge and the proofs import only Mathlib."
+
+fidelity:
+  divergences: >-
+    The solutions are counted as triples in (Z/p)³, including (0, 0, 0); the projective count
+    p + 1 is the equivalent statement (p² − 1)/(p − 1) and is not stated in Lean.
+
+review:
+  status: "self-assessed"
+  reviewers: []
+  notes: "Not independently reviewed."
+
+alignment:
+  namespace: "FermatCubicModP"
+  statements:
+    - source: "Cubing is a bijection of Z/p for a prime p ≡ 2 (mod 3)"
+      lean: "FermatCubicModP.cube_bijective"
+      module: "MorleySmithFormal.FermatCubicModP.Challenge"
+      status: "proved"
+    - source: "x³ + y³ ≡ z³ (mod p) has p² solutions for a prime p ≡ 2 (mod 3)"
+      lean: "FermatCubicModP.card_solutions"
+      module: "MorleySmithFormal.FermatCubicModP.Challenge"
+      status: "proved"
