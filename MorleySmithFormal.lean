@@ -12,3 +12,5 @@ public import MorleySmithFormal.SilentShells.Solution
 public import MorleySmithFormal.FermatCubicModP.Solution
 public import MorleySmithFormal.LatticeMetricDivergence.Basic
 public import MorleySmithFormal.LatticeMetricDivergence.Solution
+public import MorleySmithFormal.SquareFrameEnergies.Basic
+public import MorleySmithFormal.SquareFrameEnergies.Solution

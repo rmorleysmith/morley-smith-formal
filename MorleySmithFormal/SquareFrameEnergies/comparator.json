@@ -1,0 +1,6 @@
+{
+  "challenge_module": "MorleySmithFormal.SquareFrameEnergies.Challenge",
+  "solution_module": "MorleySmithFormal.SquareFrameEnergies.Solution",
+  "theorem_names": ["SquareFrameEnergies.identities", "SquareFrameEnergies.exists_iff"],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"]
+}

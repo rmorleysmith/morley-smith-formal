@@ -1,0 +1,85 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "Determinant-one integer matrices: (a - d)^2 + (b + c)^2 takes exactly the values n with n and n + 4 sums of two squares"
+  description: >-
+    For an integer matrix (a b; c d) of determinant one, a^2 + b^2 + c^2 + d^2 - 2 = (a - d)^2 + (b + c)^2
+    and (a - d)^2 + (b + c)^2 + 4 = (a + d)^2 + (b - c)^2. An integer n equals (a - d)^2 + (b + c)^2 for
+    such a matrix exactly when n and n + 4 are both sums of two squares. Method: the identities give one
+    direction; for the other, a square is congruent modulo 4 to its residue modulo 2, so the parities of
+    two representations n = p^2 + q^2 and n + 4 = r^2 + s^2 can be matched (swapping r and s if needed),
+    and a = (r + p)/2, d = (r - p)/2, b = (q + s)/2, c = (q - s)/2 has determinant one. In note 13 of
+    the repository l-functions-and-physics, tr(g g^T)/2 is the Lorentz factor of the square lattice
+    frame moved by g, and (a - d)^2 + (b + c)^2 is twice its kinetic energy in units of the rest energy.
+  authors:
+    - "Richard Morley-Smith"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Richard Morley-Smith"
+
+classification:
+  arxiv: ["math.NT"]          # one or two arXiv categories
+  msc2020: ["11E25", "11F06"]
+
+# Palomar: type is paper / book / web discussion / folklore / original-proof / other. At least one source
+# must formalize / adapt / independently-prove the result; or, for a new result, one source has
+# type original-proof with relationship other, and every other source is background.
+sources:
+  - title: "Speed, spread and swirl: three equations of motion on a lattice (note 13)"
+    authors:
+      - "Richard Morley-Smith"
+    id: "https://github.com/rmorleysmith/l-functions-and-physics"
+    type: "original-proof"
+    relationship: "other"
+    note: >-
+      The proof was written for this entry and is given in the note. We did not find the
+      statement in the literature and make no claim that it is new.
+    license: "CC-BY-4.0"
+    author_endorsement: "n/a"
+
+related_formalizations: []
+
+status:
+  scope: >-
+    Fully proved: the two identities and the characterisation of the values. Not included: the
+    count r_2(n) r_2(n + 4) of matrices with a given value (checked numerically in the note), and
+    any statement about Lorentz transformations.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: ["propext", "Classical.choice", "Quot.sound"]
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["Claude (Anthropic)"]
+      framework: "Claude Code"
+      tool_setup: >-
+        The author directed the work; Claude, through Claude Code, wrote and checked the Lean
+        proofs, and the Lean kernel and Comparator verified the result.
+      cost:
+        wall_time: "under an hour"
+        spend_usd: "not tracked"
+        hardware: "local machine"
+  spend_usd: "not tracked"
+  notes: "The Challenge imports only Mathlib.Algebra.Ring.Int.Defs; the proofs import Mathlib."
+
+fidelity:
+  divergences: "none"
+
+review:
+  status: "self-assessed"
+  reviewers: []
+  notes: "Not independently reviewed."
+
+alignment:
+  namespace: "SquareFrameEnergies"
+  statements:
+    - source: "The two identities for ad - bc = 1"
+      lean: "SquareFrameEnergies.identities"
+      module: "MorleySmithFormal.SquareFrameEnergies.Challenge"
+      status: "proved"
+    - source: "The values of (a - d)^2 + (b + c)^2 are the n with n and n + 4 sums of two squares"
+      lean: "SquareFrameEnergies.exists_iff"
+      module: "MorleySmithFormal.SquareFrameEnergies.Challenge"
+      status: "proved"
