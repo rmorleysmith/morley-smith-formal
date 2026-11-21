@@ -1,0 +1,158 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "The log-determinant divergence of two lattice metrics is 2 cosh d − 2"
+  description: >-
+    A point z = x + iy of the upper half-plane gives the lattice Z + Zz with basis (z, 1); the Gram
+    matrix of the basis divided by the covolume is M(z) = (1/y)[[x² + y², x], [x, 1]], of
+    determinant one. For G = M(z)M(w)⁻¹: det G = 1 and tr G = 2 cosh d(z, w), with d the
+    hyperbolic distance, so the eigenvalues of G are e^{±d}, and the log-determinant divergence
+    tr G − 2 − log det G = tr(G − 1 − log G), twice the Kullback–Leibler divergence of the centred
+    Gaussian distributions with covariances M(z) and M(w), equals 2 cosh d(z, w) − 2. For a change
+    of basis γ = (a b; c d) in SL(2, Z) with trace t it equals
+    t² − 4 + (c(x² + y²) + (d − a)x − b)²/y², so it is at least t² − 4, with equality exactly when
+    c(x² + y²) + (d − a)x − b = 0; for |t| > 2 it is at least 5, and (2 1; 1 1) attains 5 at
+    z = i. Method: explicit 2 × 2 matrices and Mathlib's formula for cosh of the hyperbolic
+    distance; the change of basis uses the displacement formula of the result ModularSystole in
+    this repository.
+  authors:
+    - "Richard Morley-Smith"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Richard Morley-Smith"
+
+classification:
+  arxiv: ["math.NT", "math-ph"]
+  msc2020: ["11F06", "51M10", "94A17"]
+
+sources:
+  - title: "The upper half-plane as the space of positive definite binary forms of determinant one; the point-pair invariant"
+    authors:
+      - "folklore"
+    id: "standard: tr(M(z)M(w)⁻¹) = 2 cosh d(z, w) = 2 + |z − w|²/(Im z Im w)"
+    type: "folklore"
+    relationship: "independently-proves"
+    note: >-
+      The identity is the classical description of the hyperbolic plane SL(2, R)/SO(2) as the
+      space of positive definite binary quadratic forms of determinant one, with
+      |z − w|²/(Im z Im w) = 4u(z, w) the point-pair invariant. No specific text was followed;
+      the statements were checked numerically on 2000 random pairs and proved directly.
+    license: "n/a"
+    author_endorsement: "n/a"
+  - title: "Λ-Gravity from Entropy"
+    authors:
+      - "Ginestra Bianconi"
+    id: "Physics Letters B 882 (2026), 141014, doi:10.1016/j.physletb.2026.141014, arXiv:2610.34496"
+    type: "paper"
+    relationship: "background"
+    note: >-
+      Source of the motivation, not of the statements. In the theory of gravity from entropy the
+      Lagrangian is −Tr_F ln(𝐆̃g̃⁻¹) (equation (9)), and the theory has an emergent cosmological
+      term Λ_𝒢 = (1/6β) Tr_F(𝒢 − I − ln 𝒢) of the G-field 𝒢 = [𝐆̃g̃⁻¹]⁻¹ (equations (16), (19)).
+      The divergence of this file has the form of that cosmological term, evaluated on two flat
+      metrics of a two-dimensional lattice; on such metrics, which have equal determinant, the
+      Lagrangian itself, −log det, vanishes. Read on 21 November 2026: the abstract and
+      equations (5) to (21) of arXiv:2610.34496v1; the Physical Review D paper
+      (Gravity from entropy, 111 (2025) 066001, arXiv:2408.14391), which normalises the term as
+      1/(2β) in its equation (64), was consulted through a reviewer's reading.
+    license: "unknown"
+    author_endorsement: "n/a"
+
+related_formalizations:
+  - id: "https://github.com/leanprover-community/mathlib4"
+    relationship: "builds-on"
+    note: >-
+      Mathlib's UpperHalfPlane.cosh_dist and its 2 × 2 determinant, inverse and trace lemmas.
+  - id: "https://github.com/rmorleysmith/morley-smith-formal/tree/main/MorleySmithFormal/ModularSystole"
+    relationship: "builds-on"
+    note: >-
+      The displacement formula cosh d(z, γz) = t²/2 − 1 + (c(x² + y²) + (d − a)x − b)²/(2y²)
+      and the value at (2 1; 1 1), i are taken from that result.
+
+status:
+  scope: >-
+    Fully proved for 2 × 2 matrices. The matrix logarithm is not used: the divergence is defined
+    as tr − 2 − log det, which equals tr(G − 1 − log G) for G with positive eigenvalues. The
+    equality case is stated as the vanishing of c(x² + y²) + (d − a)x − b; that this locus is the
+    axis of γ for |t| > 2 is not stated. Not included: metrics of different determinant (for
+    s·M(z) the divergence is 2s cosh d − 2 − 2 log s, checked numerically); lattices of higher
+    rank; Dirichlet's class number formula, which relates the minimum t² − 4 and the length of
+    the closed geodesic to L(1, χ_D).
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: ["propext", "Classical.choice", "Quot.sound"]
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["Claude (Anthropic)"]
+      framework: "Claude Code"
+      tool_setup: >-
+        The author asked whether a functional of Bianconi's theory of gravity from entropy can be
+        evaluated exactly on lattices and the modular group. Claude, through Claude
+        Code, read the definitions of the theory, proposed evaluating the cosmological-term
+        functional on lattice metrics, checked the identities numerically, wrote the statements
+        and the Lean proofs; an independent review corrected the identification of the functional;
+        the Lean kernel and Comparator verified the result.
+      cost:
+        wall_time: "about two hours"
+        spend_usd: "not tracked"
+        hardware: "local machine"
+  spend_usd: "not tracked"
+  notes: "The Challenge imports only Mathlib; its auxiliary definitions latticeMetric, divergence and golden are written out."
+
+fidelity:
+  divergences: >-
+    The Challenge defines latticeMetric, divergence and golden itself. The divergence is
+    tr(AB⁻¹) − 2 − log det(AB⁻¹), the log-determinant form of tr(G − 1 − log G); statement 3
+    gives the eigenvalue form for G = M(z)M(w)⁻¹.
+
+review:
+  status: "self-assessed"
+  reviewers: []
+  notes: "Reviewed by an independent AI agent before publication; not reviewed by a person."
+
+alignment:
+  namespace: "LatticeMetricDivergence"
+  statements:
+    - source: "det(M(z)M(w)⁻¹) = 1"
+      lean: "LatticeMetricDivergence.det_mul_inv"
+      module: "MorleySmithFormal.LatticeMetricDivergence.Challenge"
+      status: "proved"
+    - source: "tr(M(z)M(w)⁻¹) = 2 cosh d(z, w)"
+      lean: "LatticeMetricDivergence.trace_mul_inv"
+      module: "MorleySmithFormal.LatticeMetricDivergence.Challenge"
+      status: "proved"
+    - source: "e^{±d} are the roots of the characteristic equation"
+      lean: "LatticeMetricDivergence.eigenvalue_equation"
+      module: "MorleySmithFormal.LatticeMetricDivergence.Challenge"
+      status: "proved"
+    - source: "∑(λ − 1 − log λ) over e^{±d} is 2 cosh d − 2"
+      lean: "LatticeMetricDivergence.sum_eigenvalues"
+      module: "MorleySmithFormal.LatticeMetricDivergence.Challenge"
+      status: "proved"
+    - source: "The divergence of two lattice metrics is 2 cosh d − 2"
+      lean: "LatticeMetricDivergence.divergence_latticeMetric"
+      module: "MorleySmithFormal.LatticeMetricDivergence.Challenge"
+      status: "proved"
+    - source: "Change of basis by γ: t² − 4 plus a square"
+      lean: "LatticeMetricDivergence.divergence_smul"
+      module: "MorleySmithFormal.LatticeMetricDivergence.Challenge"
+      status: "proved"
+    - source: "The divergence is at least t² − 4"
+      lean: "LatticeMetricDivergence.discriminant_le_divergence"
+      module: "MorleySmithFormal.LatticeMetricDivergence.Challenge"
+      status: "proved"
+    - source: "Equality exactly where c(x² + y²) + (d − a)x − b = 0"
+      lean: "LatticeMetricDivergence.divergence_eq_discriminant_iff"
+      module: "MorleySmithFormal.LatticeMetricDivergence.Challenge"
+      status: "proved"
+    - source: "For |t| > 2 the divergence is at least 5"
+      lean: "LatticeMetricDivergence.five_le_divergence"
+      module: "MorleySmithFormal.LatticeMetricDivergence.Challenge"
+      status: "proved"
+    - source: "(2 1; 1 1) at z = i: the divergence is 5"
+      lean: "LatticeMetricDivergence.divergence_golden"
+      module: "MorleySmithFormal.LatticeMetricDivergence.Challenge"
+      status: "proved"

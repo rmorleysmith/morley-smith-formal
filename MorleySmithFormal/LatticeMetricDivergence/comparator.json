@@ -1,0 +1,21 @@
+{
+  "challenge_module": "MorleySmithFormal.LatticeMetricDivergence.Challenge",
+  "solution_module": "MorleySmithFormal.LatticeMetricDivergence.Solution",
+  "theorem_names": [
+    "LatticeMetricDivergence.det_mul_inv",
+    "LatticeMetricDivergence.trace_mul_inv",
+    "LatticeMetricDivergence.eigenvalue_equation",
+    "LatticeMetricDivergence.sum_eigenvalues",
+    "LatticeMetricDivergence.divergence_latticeMetric",
+    "LatticeMetricDivergence.divergence_smul",
+    "LatticeMetricDivergence.discriminant_le_divergence",
+    "LatticeMetricDivergence.divergence_eq_discriminant_iff",
+    "LatticeMetricDivergence.five_le_divergence",
+    "LatticeMetricDivergence.divergence_golden"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ]
+}
