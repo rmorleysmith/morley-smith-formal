@@ -1,0 +1,6 @@
+{
+  "challenge_module": "MorleySmithFormal.SilentShells.Challenge",
+  "solution_module": "MorleySmithFormal.SilentShells.Solution",
+  "theorem_names": ["SilentShells.sum_three_sq_ne", "SilentShells.shell_eq_empty"],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"]
+}
