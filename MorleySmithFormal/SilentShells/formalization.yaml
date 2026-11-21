@@ -25,13 +25,13 @@ sources:
   - title: "Representations of Integers as Sums of Squares"
     authors:
       - "Emil Grosswald"
-    id: "Springer, 1985, ISBN 978-0-387-96126-2"
+    id: "Springer, New York, 1985, doi:10.1007/978-1-4613-8566-0"
     type: "book"
     relationship: "independently-proves"
     note: >-
-      Standard reference for the three-square theorem (Chapter 4). Cited from memory for the
-      statement; the chapter number and the ISBN were not checked against the book. The
-      proof formalised here is the usual descent modulo 8 and 4 and was written directly.
+      Standard reference for the three-square theorem. Title, publisher and year checked
+      against Crossref on 21 November 2026; the book itself was not consulted. The proof
+      formalised here is the usual descent modulo 8 and 4 and was written directly.
     license: "unknown"
     author_endorsement: "n/a"
 
