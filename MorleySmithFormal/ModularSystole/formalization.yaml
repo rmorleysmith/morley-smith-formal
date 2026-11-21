@@ -2,7 +2,7 @@
 version: "v0.4"
 
 project:
-  name: "The shortest closed geodesic of the modular surface has length 4 log φ"
+  name: "The least displacement of a hyperbolic element of SL(2, ℤ) is 4 log φ"
   description: >-
     For γ = (a b; c d) in SL(2, ℤ) with trace t = a + d acting on the upper half-plane with its
     hyperbolic distance, and z = x + iy: (1) cosh d(z, γz) = t²/2 − 1 +

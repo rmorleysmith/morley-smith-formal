@@ -35,4 +35,19 @@ theorem fermat_form (q u e : ℚ) :
   rw [MorleySmithFormal.Hypercharge.cubic_eq]
   constructor <;> intro h <;> linarith
 
+theorem gauge_anomaly_iff_colours (N : ℕ) (hN : N ≠ 0) (q u d l e : ℚ) :
+    (2 * q + u + d = 0 ∧ (N : ℚ) * q + l = 0 ∧
+        2 * (N : ℚ) * q ^ 3 + (N : ℚ) * u ^ 3 + (N : ℚ) * d ^ 3 + 2 * l ^ 3 + e ^ 3 = 0) ↔
+      (q = 0 ∧ l = 0 ∧ e = 0 ∧ d = -u) ∨
+        (u = ((N : ℚ) - 1) * q ∧ d = -((N : ℚ) + 1) * q ∧ l = -(N : ℚ) * q ∧ e = 2 * (N : ℚ) * q) ∨
+        (u = -((N : ℚ) + 1) * q ∧ d = ((N : ℚ) - 1) * q ∧ l = -(N : ℚ) * q ∧
+          e = 2 * (N : ℚ) * q) :=
+  MorleySmithFormal.Hypercharge.solutions_colours_iff hN q u d l e
+
+theorem gravitational_anomaly_colours (N : ℕ) (hN : N ≠ 0) (q u d l e : ℚ)
+    (h3 : 2 * q + u + d = 0) (h2 : (N : ℚ) * q + l = 0)
+    (hc : 2 * (N : ℚ) * q ^ 3 + (N : ℚ) * u ^ 3 + (N : ℚ) * d ^ 3 + 2 * l ^ 3 + e ^ 3 = 0) :
+    2 * (N : ℚ) * q + (N : ℚ) * u + (N : ℚ) * d + 2 * l + e = 0 :=
+  MorleySmithFormal.Hypercharge.gravitational_colours hN h3 h2 hc
+
 end Hypercharge

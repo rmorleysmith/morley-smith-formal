@@ -23,7 +23,7 @@ The statements say that `Θ_L` is a Siegel modular form of weight `k` for `Sp(2n
 
 "Even" means `‖v‖²` is an even integer for `v ∈ L`; "unimodular" means `L` is its own dual
 lattice. For `n = 1` this is the classical fact that `Θ_L` is a modular form of weight `k` for
-`SL(2, ℤ)`. Only Mathlib definitions are used. This file restates `Challenge.lean` word for word and proves it from `TauTrack/Siegel`.
+`SL(2, ℤ)`. The file imports only Mathlib, and the auxiliary definitions it needs are written out below. This file restates `Challenge.lean` word for word and proves it from `TauTrack/Siegel`.
 -/
 
 @[expose] public section

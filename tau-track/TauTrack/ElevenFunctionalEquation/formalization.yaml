@@ -33,7 +33,7 @@ sources:
       - "Erich Hecke"
     id: "Mathematische Annalen 112 (1936), 664–699, doi:10.1007/BF01565437"
     type: "paper"
-    relationship: "independently-proves"
+    relationship: "background"
     note: >-
       Source of the correspondence between modular forms and Dirichlet series with a functional
       equation, through the Mellin transform. The bibliographic data were checked against

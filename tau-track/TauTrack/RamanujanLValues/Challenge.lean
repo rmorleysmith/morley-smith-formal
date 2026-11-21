@@ -9,7 +9,7 @@ public import Mathlib.NumberTheory.ModularForms.Discriminant
 Let `Δ = q ∏ (1 − qⁿ)²⁴ = ∑ τ(n) qⁿ` be the modular discriminant (Mathlib's
 `CuspForm.discriminant`, a cusp form of weight 12 for `SL(2, ℤ)`), and let `L(Δ, s)` be its
 `L`-function (Mathlib's `ModularForm.L`): the entire function equal to `∑ τ(n) n^{−s}` for
-`Re s > 13/2`. The statements say:
+`Re s > 7` (Mathlib's `CuspForm.hasSum_L`). The statements say:
 
 1. `L_four`: `L(Δ, 4) = (25 π² / 72) · L(Δ, 2)`;
 2. `L_six`: `L(Δ, 6) = (π⁴ / 18) · L(Δ, 2)`;

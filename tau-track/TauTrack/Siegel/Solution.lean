@@ -14,8 +14,7 @@ imaginary part is positive definite. A real symplectic matrix `M = (A B; C D)` (
 2. `(A Z + B)(C Z + D)⁻¹` is again symmetric with positive definite imaginary part;
 3. the identity matrix acts trivially, and `(M N)·Z = M·(N·Z)`.
 
-For `n = 1` this is the action of `SL(2, ℝ)` on the upper half-plane. Only Mathlib definitions
-are used. Restates `Challenge.lean` and proves it from `TauTrack.Siegel.Basic`.
+For `n = 1` this is the action of `SL(2, ℝ)` on the upper half-plane. The file imports only Mathlib, and the auxiliary definitions it needs are written out below. Restates `Challenge.lean` and proves it from `TauTrack.Siegel.Basic`.
 -/
 
 @[expose] public section

@@ -20,7 +20,8 @@ The gauge anomalies cancel exactly when
 
 and the mixed gravitational anomaly cancels when `6q + 3u + 3d + 2l + e = 0`.
 
-Following Lohitsiri and Tong, substitute `l = −3q` and `d = −2q − u` in the cubic condition: it
+Substitute `l = −3q` and `d = −2q − u` in the cubic condition (Lohitsiri and Tong reach Fermat's
+curve by a rational change of variables; the polynomial form used here is equivalent): it
 becomes `e³ + (u − 2q)³ = (u + 4q)³` (`cubic_eq`), Fermat's equation of degree 3. By Fermat's
 theorem for cubes (Euler; Mathlib's `fermatLastTheoremThree`), one of the three cubes is zero:
 
@@ -111,5 +112,81 @@ theorem gravitational {q u d l e : ℚ} (h3 : 2 * q + u + d = 0) (h2 : 3 * q + l
     6 * q + 3 * u + 3 * d + 2 * l + e = 0 := by
   rcases solutions h3 h2 hc with ⟨rfl, rfl, rfl, rfl⟩ | ⟨rfl, rfl, rfl, rfl⟩ | ⟨rfl, rfl, rfl, rfl⟩ <;>
     ring
+
+/-! ## Any number of colours
+
+With `N` colours the gauge conditions are `2q + u + d = 0` (`SU(N)² U(1)`), `Nq + l = 0`
+(`SU(2)² U(1)`) and `2Nq³ + Nu³ + Nd³ + 2l³ + e³ = 0` (`U(1)³`). The same substitution gives
+`e³ + (u + (1 − N)q)³ = (u + (N + 1)q)³`: Fermat's cubic for every `N`. -/
+
+/-- With `N` colours and the two linear gauge conditions, the cubic condition is Fermat's cubic. -/
+theorem cubic_eq_colours (N q u e : ℚ) :
+    2 * N * q ^ 3 + N * u ^ 3 + N * (-2 * q - u) ^ 3 + 2 * (-N * q) ^ 3 + e ^ 3 =
+      e ^ 3 + (u + (1 - N) * q) ^ 3 - (u + (N + 1) * q) ^ 3 := by
+  ring
+
+/-- **The solutions of the gauge anomaly conditions of one generation with `N` colours.** -/
+theorem solutions_colours {N : ℕ} (hN : N ≠ 0) {q u d l e : ℚ} (h3 : 2 * q + u + d = 0)
+    (h2 : (N : ℚ) * q + l = 0)
+    (hc : 2 * (N : ℚ) * q ^ 3 + (N : ℚ) * u ^ 3 + (N : ℚ) * d ^ 3 + 2 * l ^ 3 + e ^ 3 = 0) :
+    (q = 0 ∧ l = 0 ∧ e = 0 ∧ d = -u) ∨
+      (u = ((N : ℚ) - 1) * q ∧ d = -((N : ℚ) + 1) * q ∧ l = -(N : ℚ) * q ∧ e = 2 * (N : ℚ) * q) ∨
+      (u = -((N : ℚ) + 1) * q ∧ d = ((N : ℚ) - 1) * q ∧ l = -(N : ℚ) * q ∧ e = 2 * (N : ℚ) * q) := by
+  have hN' : (N : ℚ) ≠ 0 := Nat.cast_ne_zero.mpr hN
+  have hd : d = -2 * q - u := by linarith
+  have hl : l = -(N : ℚ) * q := by linarith
+  subst hd hl
+  rw [cubic_eq_colours] at hc
+  have hF : e ^ 3 + (u + (1 - (N : ℚ)) * q) ^ 3 = (u + ((N : ℚ) + 1) * q) ^ 3 := by linarith
+  rcases fermat_cubic hF with he | hu | hu
+  · -- `e = 0`
+    left
+    rw [he] at hF
+    have h := cube_injective
+      (by simpa using hF : (u + (1 - (N : ℚ)) * q) ^ 3 = (u + ((N : ℚ) + 1) * q) ^ 3)
+    have hNq : (N : ℚ) * q = 0 := by linarith
+    have hq : q = 0 := (mul_eq_zero.mp hNq).resolve_left hN'
+    subst hq
+    exact ⟨rfl, by ring, he, by ring⟩
+  · -- `u = (N − 1)q`
+    right; left
+    have hu' : u = ((N : ℚ) - 1) * q := by linarith
+    subst hu'
+    have h : e ^ 3 = (2 * (N : ℚ) * q) ^ 3 := by
+      have h0 : (((N : ℚ) - 1) * q + (1 - (N : ℚ)) * q) = 0 := by ring
+      rw [h0] at hF
+      linear_combination hF
+    exact ⟨rfl, by ring, rfl, cube_injective h⟩
+  · -- `u = −(N + 1)q`
+    right; right
+    have hu' : u = -((N : ℚ) + 1) * q := by linarith
+    subst hu'
+    have h : e ^ 3 = (2 * (N : ℚ) * q) ^ 3 := by
+      have h0 : (-((N : ℚ) + 1) * q + ((N : ℚ) + 1) * q) = 0 := by ring
+      rw [h0] at hF
+      linear_combination hF
+    exact ⟨rfl, by ring, rfl, cube_injective h⟩
+
+/-- Conversely, each of the three families satisfies the gauge conditions with `N` colours. -/
+theorem solutions_colours_iff {N : ℕ} (hN : N ≠ 0) (q u d l e : ℚ) :
+    (2 * q + u + d = 0 ∧ (N : ℚ) * q + l = 0 ∧
+        2 * (N : ℚ) * q ^ 3 + (N : ℚ) * u ^ 3 + (N : ℚ) * d ^ 3 + 2 * l ^ 3 + e ^ 3 = 0) ↔
+      (q = 0 ∧ l = 0 ∧ e = 0 ∧ d = -u) ∨
+        (u = ((N : ℚ) - 1) * q ∧ d = -((N : ℚ) + 1) * q ∧ l = -(N : ℚ) * q ∧ e = 2 * (N : ℚ) * q) ∨
+        (u = -((N : ℚ) + 1) * q ∧ d = ((N : ℚ) - 1) * q ∧ l = -(N : ℚ) * q ∧
+          e = 2 * (N : ℚ) * q) := by
+  constructor
+  · rintro ⟨h3, h2, hc⟩
+    exact solutions_colours hN h3 h2 hc
+  · rintro (⟨rfl, rfl, rfl, rfl⟩ | ⟨rfl, rfl, rfl, rfl⟩ | ⟨rfl, rfl, rfl, rfl⟩) <;>
+      refine ⟨by ring, by ring, by ring⟩
+
+/-- With `N` colours the gauge conditions imply the gravitational condition. -/
+theorem gravitational_colours {N : ℕ} (hN : N ≠ 0) {q u d l e : ℚ} (h3 : 2 * q + u + d = 0)
+    (h2 : (N : ℚ) * q + l = 0)
+    (hc : 2 * (N : ℚ) * q ^ 3 + (N : ℚ) * u ^ 3 + (N : ℚ) * d ^ 3 + 2 * l ^ 3 + e ^ 3 = 0) :
+    2 * (N : ℚ) * q + (N : ℚ) * u + (N : ℚ) * d + 2 * l + e = 0 := by
+  rcases solutions_colours hN h3 h2 hc with
+    ⟨rfl, rfl, rfl, rfl⟩ | ⟨rfl, rfl, rfl, rfl⟩ | ⟨rfl, rfl, rfl, rfl⟩ <;> ring
 
 end MorleySmithFormal.Hypercharge

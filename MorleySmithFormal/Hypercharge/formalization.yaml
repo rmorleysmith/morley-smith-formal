@@ -13,6 +13,12 @@ project:
     (2) the three conditions imply the mixed gravitational condition 6q + 3u + 3d + 2l + e = 0;
     (3) after substituting l = −3q and d = −2q − u, the cubic condition is
     e³ + (u − 2q)³ = (u + 4q)³.
+    (4) the same with N ≥ 1 colours: the conditions 2q + u + d = 0, Nq + l = 0,
+    2Nq³ + Nu³ + Nd³ + 2l³ + e³ = 0 hold exactly when q = l = e = 0 and d = −u, or
+    {u, d} = {(N − 1)q, −(N + 1)q}, l = −Nq, e = 2Nq, and they imply 2Nq + Nu + Nd + 2l + e = 0;
+    the cubic is e³ + (u + (1 − N)q)³ = (u + (N + 1)q)³, Fermat's cubic for every N.
+    The hypercharges are rational (quantised hypercharge), and the statements concern one
+    generation without a right-handed neutrino.
     Method: (3) is an identity of polynomials. By Fermat's theorem for cubes over ℚ, one of e,
     u − 2q, u + 4q is zero; cubing is injective on ℚ, which gives q = 0 in the first case and
     e = 6q in the other two. (2) is checked on the three families.
@@ -35,13 +41,16 @@ sources:
     type: "paper"
     relationship: "independently-proves"
     note: >-
-      Source of the theorem that the gauge anomaly conditions of one generation, without the
-      gravitational condition, force the hypercharges of the Standard Model and imply the
-      gravitational condition, by Fermat's theorem for cubes. Bibliographic data checked against
-      Crossref on 20 November 2026. The paper itself was not consulted for this file: the
-      statement is known here through its title and through the Physlib file that cites it, and
-      the substitution leading to Fermat's cubic was derived for this file, so it may differ
-      from the paper's.
+      Source of the theorem that, for quantised (integer, equivalently rational) hypercharges,
+      the gauge anomaly conditions of one generation have exactly the solutions listed here and
+      imply the gravitational condition, by Fermat's theorem for cubes. The paper
+      (arXiv:1907.00514v3) was read on 21 November 2026: its equations (1), (2) are the
+      conditions used here and its (4), (5) the solutions, written for the right-handed fields
+      u_R, d_R, e_R, so that u, d, e have the opposite sign to this file's left-handed
+      conjugates. It reaches the Fermat curve v³ + w³ = 1 by a rational change of variables
+      with q = 1; this file uses the equivalent polynomial identity
+      e³ + (u − 2q)³ = (u + 4q)³, derived for this file. Bibliographic data checked against
+      Crossref on 20 November 2026.
     license: "unknown"
     author_endorsement: "n/a"
 
@@ -49,7 +58,7 @@ related_formalizations:
   - id: "https://github.com/leanprover-community/physlib"
     relationship: "independent"
     note: >-
-      Not a dependency. Physlib (Physlib/Particles/StandardModel/AnomalyCancellation/NoGrav/One/,
+      Not a dependency. Physlib (file by Joseph Tooby-Smith, 2024; Physlib/Particles/StandardModel/AnomalyCancellation/NoGrav/One/,
       read on 20 November 2026) defines the anomaly cancellation conditions of the Standard Model
       in general and proves, for one family, that every solution of the conditions without
       gravity satisfies the gravitational condition (SM.SMNoGrav.One.accGravSatisfied), through
@@ -110,6 +119,14 @@ alignment:
       status: "proved"
     - source: "The gauge conditions imply the gravitational condition (Lohitsiri and Tong)"
       lean: "Hypercharge.gravitational_anomaly"
+      module: "MorleySmithFormal.Hypercharge.Challenge"
+      status: "proved"
+    - source: "The solutions of the gauge anomaly conditions with N colours (the reduction of Lohitsiri and Tong, with N in place of 3)"
+      lean: "Hypercharge.gauge_anomaly_iff_colours"
+      module: "MorleySmithFormal.Hypercharge.Challenge"
+      status: "proved"
+    - source: "With N colours the gauge conditions imply the gravitational condition"
+      lean: "Hypercharge.gravitational_anomaly_colours"
       module: "MorleySmithFormal.Hypercharge.Challenge"
       status: "proved"
     - source: "The cubic condition is Fermat's cubic"

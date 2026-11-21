@@ -2,10 +2,10 @@
 version: "v0.4"
 
 project:
-  name: "Rational ratios of critical values of Ramanujan's L-function"
+  name: "Relations between critical values of Ramanujan's L-function"
   description: >-
     Let Δ = q∏(1 − qⁿ)²⁴ = ∑τ(n)qⁿ and let L(Δ, s) be its L-function, the entire function equal
-    to ∑τ(n)n^{−s} for Re s > 13/2 (Mathlib's ModularForm.L of CuspForm.discriminant). Three
+    to ∑τ(n)n^{−s} for Re s > 7 (Mathlib's ModularForm.L of CuspForm.discriminant; Mathlib's CuspForm.hasSum_L). Three
     identities are proved: L(Δ, 4) = (25π²/72)·L(Δ, 2), L(Δ, 6) = (π⁴/18)·L(Δ, 2) and
     L(Δ, 5) = (3π²/14)·L(Δ, 3). They are instances of Manin's theorem on the periods of Δ.
     Method: (1) the coefficients of the period polynomial r_Δ(X, Y) = ∫₀^{i∞} Δ(τ)(X − τY)¹⁰ dτ
@@ -70,7 +70,9 @@ related_formalizations:
 
 status:
   scope: >-
-    Fully proved. Not included: the values at s = 1 and s = 11, whose ratio to the other odd
+    Fully proved. The three identities are stated as equalities; that L(Δ, 2) and L(Δ, 3) are
+    non-zero (they are positive) is not proved here, so the word "ratio" is not used in the
+    statements. Not included: the values at s = 1 and s = 11, whose ratio to the other odd
     values involves the prime 691 and does not follow from the period relations alone; the
     same statements for other eigenforms; any statement about the transcendence or
     independence of L(Δ, 2) and L(Δ, 3).
@@ -112,7 +114,7 @@ review:
 alignment:
   namespace: "RamanujanLValues"
   statements:
-    - source: "Manin's periods theorem for Δ, even critical integers: L(Δ, 4)/L(Δ, 2)"
+    - source: "Manin's periods theorem for Δ, even critical integers: L(Δ, 4) = (25π²/72) L(Δ, 2)"
       lean: "RamanujanLValues.L_four"
       module: "TauTrack.RamanujanLValues.Challenge"
       status: "proved"

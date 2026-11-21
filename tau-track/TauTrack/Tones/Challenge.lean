@@ -23,7 +23,7 @@ Let `S = (0 −1; 1 0)` and `T = (1 1; 0 1)` be the standard generators of `SL(2
    * every homomorphism `χ` from `SL(2, ℤ)` to a commutative group is `γ ↦ χ(T)^{p(γ)}`: the map
      `p` is the largest abelian quotient of the modular group;
    * `η(γτ)² = e^{2πi p(γ)/12} (cτ + d) η(τ)²` for every `τ` in the upper half-plane: `p` is the
-     exponent of the multiplier of `η²`, a form of weight 1 (this is Rademacher's formula for
+     exponent of the multiplier of `η²`, a form of weight 1 (this is the classical closed form of
      the multiplier of `η`, squared);
    * every character `χ : SL(2, ℤ) → ℂˣ` is `γ ↦ e^{2πi k p(γ)/12}` for exactly one `k` in `ℤ/12`.
 
